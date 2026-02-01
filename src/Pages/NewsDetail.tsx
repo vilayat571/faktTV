@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import type { News } from "../types";
-import { fetchNewsById } from "../utils/api";
 import Layout from "../Layout";
 import { ArrowLeft, Type } from "lucide-react";
 import NewsCard from "../components/NewsCard";
 import { API_ENDPOINT } from "../constants/urls";
+import { fetchNewsById } from "../utils/api";
 
 const NewsDetail = () => {
   const { id } = useParams<{ id: string }>();
