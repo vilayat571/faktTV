@@ -15,11 +15,9 @@ export interface ApiResponse {
 }
 
 export const CATEGORIES = [
-  { name: "İdman", value: "sport" },
-  { name: "Dünya", value: "world" },
-  { name: "Texnalogiya", value: "technology" },
-  { name: "Şərq", value: "east" },
   { name: "Siyasət", value: "politic" },
+  { name: "Dünya", value: "world" },
+  { name: "İqtisadiyyat", value: "economy" },
 ];
 
  export const quickLinks = [

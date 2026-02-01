@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3000/api/v1/news";
+const API_URL = "https://agsanews-production.up.railway.app/api/v1/news";
 
 
 // Add this new function

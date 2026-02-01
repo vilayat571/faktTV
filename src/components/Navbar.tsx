@@ -143,14 +143,14 @@ const Navbar = () => {
                 <Link
                   key={category.value}
                   to={`/category/${category.value}`}
-                  className="px-4 py-2 rounded-md hover:bg-orange-500 hover:text-white transition-all duration-200"
+                  className="px-4 py-2 text-lg cursor-pointer rounded-md hover:bg-orange-500 hover:text-white transition-all duration-200"
                 >
                   {category.name}
                 </Link>
               ))}
             </div>
 
-            {/* Search Icon */}
+            {/* Search Icon + Mobile Menu Button */}
             <div className="flex items-center space-x-2">
               <button
                 onClick={openSearchModal}
@@ -166,25 +166,62 @@ const Navbar = () => {
                 className="md:hidden p-2 hover:bg-orange-500 rounded-md transition-all duration-200"
                 aria-label="Menu"
               >
-                <Menu className="w-6 h-6" />
+                {showMobileMenu ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
             </div>
           </div>
 
           {/* Mobile Menu */}
           {showMobileMenu && (
-            <div className="md:hidden mt-3 pt-3 border-t border-gray-800">
-              <div className="flex flex-col space-y-1">
-                {CATEGORIES.map((category) => (
+            <div className="md:hidden mt-3 border-t border-gray-800 bg-black">
+              {/* Mobile Search Bar */}
+              <div className="px-3 py-3 border-b border-gray-800">
+                <button
+                  onClick={() => {
+                    setShowMobileMenu(false);
+                    openSearchModal();
+                  }}
+                  className="w-full flex items-center space-x-3 bg-gray-900 rounded-lg px-4 py-3 hover:bg-gray-800 transition-colors"
+                >
+                  <Search className="w-4 h-4 text-gray-500" />
+                  <span className="text-gray-500 text-sm">Xəbər axtar...</span>
+                </button>
+              </div>
+
+              {/* Category Links */}
+              <div className="py-2 px-3 space-y-1">
+                {CATEGORIES.map((category, index) => (
                   <Link
                     key={category.value}
                     to={`/category/${category.value}`}
                     onClick={() => setShowMobileMenu(false)}
-                    className="px-3 py-2 rounded-md hover:bg-orange-500 transition-all duration-200"
+                    className="flex items-center justify-between px-4 py-3 rounded-lg hover:bg-orange-500 transition-all duration-200 group"
                   >
-                    {category.name}
+                    <div className="flex items-center space-x-3">
+                      <span className="text-xs font-bold text-orange-500 group-hover:text-white w-5 text-right">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <span className="text-sm font-medium text-gray-200 group-hover:text-white">
+                        {category.name}
+                      </span>
+                    </div>
+                    <svg
+                      className="w-4 h-4 text-gray-600 group-hover:text-white transition-colors"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
                   </Link>
                 ))}
+              </div>
+
+              {/* Footer */}
+              <div className="border-t border-gray-800 mt-2 px-3 py-3">
+                <p className="text-xs text-gray-600 text-center">
+                  THE<span className="text-orange-500">WIRE</span> © 2025
+                </p>
               </div>
             </div>
           )}
@@ -194,21 +231,26 @@ const Navbar = () => {
         <div className="h-1 bg-linear-to-r from-orange-600 via-orange-500 to-orange-600"></div>
       </nav>
 
-{/* Search Modal */}
+      {/* Search Modal */}
       {showSearchModal && (
-        <div className="fixed inset-0 z-[60] flex items-start justify-center pt-20 px-4">
+        <div className="fixed inset-0 z-[60] flex items-start justify-center px-4 sm:px-6 pt-16 sm:pt-20">
           {/* Black Background with Opacity */}
           <div className="absolute inset-0 bg-black opacity-60"></div>
 
           {/* Search Modal Content */}
           <div
             ref={searchRef}
-            className="bg-white relative top-12 z-10 w-1/2 rounded-xl shadow-2xl min-h-[80vh] max-h-[80vh] overflow-hidden flex flex-col animate-fadeIn"
+            className="
+              bg-white relative z-10 rounded-xl shadow-2xl
+              w-full sm:w-[90%] md:w-[70%] lg:w-[50%] xl:w-[45%]
+              max-h-[85vh] sm:max-h-[80vh]
+              overflow-hidden flex flex-col animate-fadeIn
+            "
           >
             {/* Search Header */}
             <div className="p-4 border-b border-gray-200 bg-linear-to-r from-orange-50 to-white">
               <div className="flex items-center space-x-3">
-                <Search className="w-5 h-5 text-orange-500" />
+                <Search className="w-5 h-5 text-orange-500 shrink-0" />
                 <input
                   type="text"
                   value={searchQuery}
@@ -219,11 +261,11 @@ const Navbar = () => {
                   }}
                   placeholder="Xəbər axtar..."
                   autoFocus
-                  className="flex-1 outline-none text-gray-900 text-lg bg-transparent placeholder-gray-400"
+                  className="flex-1 outline-none text-gray-900 text-lg bg-transparent placeholder-gray-400 min-w-0"
                 />
                 <button
                   onClick={() => setShowSearchModal(false)}
-                  className="p-2 hover:bg-orange-100 rounded-lg transition-colors"
+                  className="p-2 hover:bg-orange-100 rounded-lg transition-colors shrink-0"
                 >
                   <X className="w-5 h-5 text-gray-600" />
                 </button>
@@ -258,7 +300,7 @@ const Navbar = () => {
                       className="w-full text-left px-3 py-3 hover:bg-orange-50 rounded-lg transition-colors border-b border-gray-100 last:border-b-0"
                     >
                       <div className="flex items-start space-x-3">
-                        <div className="flex-1">
+                        <div className="flex-1 min-w-0">
                           <div className="flex items-center space-x-2 mb-1">
                             <span className="text-xs bg-orange-500 text-white px-2 py-0.5 rounded uppercase font-semibold">
                               {result.category}

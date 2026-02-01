@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import type { News } from "../types";
 import Layout from "../Layout";
-import { ArrowLeft, Type } from "lucide-react";
+import { Type } from "lucide-react";
 import NewsCard from "../components/NewsCard";
 import { API_ENDPOINT } from "../constants/urls";
 import { fetchNewsById } from "../utils/api";
@@ -152,12 +152,11 @@ const NewsDetail = () => {
   return (
     <Layout>
       <div className="">
-        <div className="">
+        <div className="px-5">
           <button
             onClick={() => navigate(-1)}
-            className="mt-5 mb-12 border bg-black text-white flex text-lg px-5 py-3 rounded gap-2 items-center justify-center hover:bg-gray-800 transition-colors"
+            className="mt-5  mb-12 border bg-black cursor-pointer text-white flex text-lg px-5 py-3 rounded gap-2 items-center justify-center hover:bg-gray-800 transition-colors"
           >
-            <ArrowLeft />
             <span>Geri</span>
           </button>
 
@@ -179,22 +178,22 @@ const NewsDetail = () => {
                   <Type className="w-4 h-4 text-gray-600" />
                   <button
                     onClick={decreaseFontSize}
-                    className="px-3 py-1 bg-white rounded hover:bg-gray-200 transition-colors text-sm font-medium"
-                    title="Decrease font size"
+                    className="px-3 cursor-pointer  py-1 bg-white rounded hover:bg-gray-200 transition-colors text-sm font-medium"
+                    title="Mətn ölçüsünü azalt"
                   >
                     A-
                   </button>
                   <button
                     onClick={resetFontSize}
-                    className="px-3 py-1 bg-white rounded hover:bg-gray-200 transition-colors text-sm font-medium"
-                    title="Reset font size"
+                    className="px-3 py-1 cursor-pointer bg-white rounded hover:bg-gray-200 transition-colors text-sm font-medium"
+                    title="Normal mətn ölçüsü"
                   >
                     A
                   </button>
                   <button
                     onClick={increaseFontSize}
-                    className="px-3 py-1 bg-white rounded hover:bg-gray-200 transition-colors text-sm font-medium"
-                    title="Increase font size"
+                    className="px-3 cursor-pointer  py-1 bg-white rounded hover:bg-gray-200 transition-colors text-sm font-medium"
+                    title="Mətn ölçüsünü artır"
                   >
                     A+
                   </button>

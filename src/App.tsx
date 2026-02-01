@@ -5,11 +5,13 @@ import CategoryPage from "./Pages/CategoryPage";
 import { AboutPage } from "./Pages/AboutPage";
 import { AdsPage } from "./Pages/AdsPage";
 import { ContactPage } from "./Pages/ContactPage";
+import ScrollToTop from "./components/ScrollToTop";
 
 
 function App() {
   return (
     <BrowserRouter>
+    <ScrollToTop />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/news/:id" element={<NewsDetail />} />
