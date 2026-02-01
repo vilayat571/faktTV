@@ -17,7 +17,7 @@ const HomePage = () => {
       try {
         const [mainStoryRes, newsRes] = await Promise.all([
           fetch("http://localhost:3000/api/v1/news?limit=1&page=1"),
-          fetch("http://localhost:3000/api/v1/news?limit=6&page=1")
+          fetch("http://localhost:3000/api/v1/news?limit=15&page=1")
         ]);
 
         const mainStoryData = await mainStoryRes.json();
@@ -41,7 +41,7 @@ const HomePage = () => {
     setLoading(true);
     try {
       const nextPage = page + 1;
-      const res = await fetch(`http://localhost:3000/api/v1/news?limit=6&page=${nextPage}`);
+      const res = await fetch(`http://localhost:3000/api/v1/news?limit=15&page=${nextPage}`);
       const data = await res.json();
 
       if (data.news.length > 0) {

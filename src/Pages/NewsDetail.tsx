@@ -4,7 +4,6 @@ import type { News } from "../types";
 import { fetchNewsById } from "../utils/api";
 import Layout from "../Layout";
 import { ArrowLeft, Type } from "lucide-react";
-import "react-quill-new/dist/quill.snow.css";
 import NewsCard from "../components/NewsCard";
 
 const NewsDetail = () => {

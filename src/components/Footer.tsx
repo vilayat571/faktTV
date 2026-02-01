@@ -40,7 +40,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-black text-white mt-16">
+    <footer className="bg-black text-white mt-16 ">
       {/* Orange Line */}
       <div className="h-1 bg-orange-500"></div>
 
