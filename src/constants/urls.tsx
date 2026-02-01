@@ -1,0 +1,1 @@
+export const API_ENDPOINT = "https://agsanews-production.up.railway.app/api/v1"

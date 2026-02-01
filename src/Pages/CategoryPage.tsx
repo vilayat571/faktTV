@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Layout from "../Layout";
 import NewsCard from "../components/NewsCard";
 import { CATEGORIES, type News } from "../types";
+import { API_ENDPOINT } from "../constants/urls";
 
 const CategoryPage = () => {
   const { category } = useParams<{ category: string }>();
@@ -51,7 +52,7 @@ const CategoryPage = () => {
     setLoading(true);
     try {
       const res = await fetch(
-        `http://localhost:3000/api/v1/news?category=${category}&limit=6&page=${pageNum}`,
+         `${API_ENDPOINT}/news?category=${category}&limit=6&page=${pageNum}`,
       );
       const data = await res.json();
 

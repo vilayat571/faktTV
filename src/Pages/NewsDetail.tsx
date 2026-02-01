@@ -5,6 +5,7 @@ import { fetchNewsById } from "../utils/api";
 import Layout from "../Layout";
 import { ArrowLeft, Type } from "lucide-react";
 import NewsCard from "../components/NewsCard";
+import { API_ENDPOINT } from "../constants/urls";
 
 const NewsDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -54,7 +55,7 @@ const NewsDetail = () => {
       if (titleWords.length > 0) {
         const searchQuery = titleWords[0]; // Use first keyword
         const searchRes = await fetch(
-          `http://localhost:3000/api/v1/news?title=${encodeURIComponent(searchQuery)}&limit=10`
+           `${API_ENDPOINT}/news?title=${encodeURIComponent(searchQuery)}&limit=10`
         );
         const searchData = await searchRes.json();
         related = searchData.news.filter((item: News) => item._id !== id);
@@ -63,7 +64,7 @@ const NewsDetail = () => {
       // Strategy 2: If not enough results, get from same category but random order
       if (related.length < 3) {
         const categoryRes = await fetch(
-          `http://localhost:3000/api/v1/news?category=${currentNews.category}&limit=10`
+           `${API_ENDPOINT}/news?category=${currentNews.category}&limit=10`
         );
         const categoryData = await categoryRes.json();
         

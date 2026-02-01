@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { CATEGORIES, quickLinks } from "../types";
 import { socialMedia } from "../constants/footer";
 import { useState } from "react";
+import { API_ENDPOINT } from "../constants/urls";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -15,7 +16,7 @@ const Footer = () => {
     setMessage("");
 
     try {
-      const response = await fetch("http://localhost:3000/api/v1/subscribe", {
+      const response = await fetch(`${API_ENDPOINT}/subscribe`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

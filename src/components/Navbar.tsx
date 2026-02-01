@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CATEGORIES, type News } from "../types";
 import { Search, X, Menu } from "lucide-react";
+import { API_ENDPOINT } from "../constants/urls";
 
 const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -77,7 +78,7 @@ const Navbar = () => {
     setIsSearching(true);
     try {
       const res = await fetch(
-        `http://localhost:3000/api/v1/news?title=${searchQuery}&limit=6&page=${pageNum}`
+       `${API_ENDPOINT}/news?title=${searchQuery}&limit=6&page=${pageNum}`
       );
       const data = await res.json();
 

@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import type { News } from "../types";
 import MainStory from "./MainStory";
 import NewsCard from "../components/NewsCard";
+import { API_ENDPOINT } from "../constants/urls";
 
 const HomePage = () => {
   const [mainStory, setMainStory] = useState<News | null>(null);
@@ -16,8 +17,8 @@ const HomePage = () => {
     const fetchData = async () => {
       try {
         const [mainStoryRes, newsRes] = await Promise.all([
-          fetch("http://localhost:3000/api/v1/news?limit=1&page=1"),
-          fetch("http://localhost:3000/api/v1/news?limit=15&page=1")
+          fetch( `${API_ENDPOINT}/news?limit=1&page=1`),
+          fetch( `${API_ENDPOINT}/news?limit=15&page=1`)
         ]);
 
         const mainStoryData = await mainStoryRes.json();
@@ -41,7 +42,7 @@ const HomePage = () => {
     setLoading(true);
     try {
       const nextPage = page + 1;
-      const res = await fetch(`http://localhost:3000/api/v1/news?limit=15&page=${nextPage}`);
+      const res = await fetch( `${API_ENDPOINT}/news?limit=15&page=${nextPage}`);
       const data = await res.json();
 
       if (data.news.length > 0) {
