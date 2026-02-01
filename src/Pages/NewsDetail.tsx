@@ -6,6 +6,8 @@ import { Type } from "lucide-react";
 import NewsCard from "../components/NewsCard";
 import { API_ENDPOINT } from "../constants/urls";
 import { fetchNewsById } from "../utils/api";
+import 'react-quill-new/dist/quill.snow.css';
+import 'quill/dist/quill.snow.css';
 
 const NewsDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -202,9 +204,9 @@ const NewsDetail = () => {
             </div>
 
             {/* Full HTML content with Quill styling */}
-            <div className="p-8">
+         <div className="p-8">
               <div
-                className="ql-editor prose prose-lg max-w-none"
+                className="ql-editor"
                 dangerouslySetInnerHTML={{ __html: news.body }}
                 style={{
                   padding: 0,
