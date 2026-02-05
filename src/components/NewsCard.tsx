@@ -35,10 +35,6 @@ const NewsCard = ({ news }: NewsCardProps) => {
           </h3>
         </Link>
 
-        <p className="text-gray-600 text-sm mb-4 line-clamp-2 leading-relaxed">
-          {news.description}
-        </p>
-
         {/* Meta Info */}
         <div className="flex flex-col space-y-2 text-xs text-gray-500 mb-4">
           <div className="flex items-center space-x-2">

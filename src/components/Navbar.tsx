@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CATEGORIES, type News } from "../types";
-import { Search, X, Menu } from "lucide-react";
+import { Search, X, Menu, Globe, ChevronRight, Frown } from "lucide-react";
 import { API_ENDPOINT } from "../constants/urls";
 
 const Navbar = () => {
@@ -41,7 +41,7 @@ const Navbar = () => {
           loadMoreResults();
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     if (observerRef.current) {
@@ -58,7 +58,10 @@ const Navbar = () => {
   // Close modal on outside click
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+      if (
+        searchRef.current &&
+        !searchRef.current.contains(event.target as Node)
+      ) {
         setShowSearchModal(false);
       }
     };
@@ -78,12 +81,14 @@ const Navbar = () => {
     setIsSearching(true);
     try {
       const res = await fetch(
-       `${API_ENDPOINT}/news?title=${searchQuery}&limit=6&page=${pageNum}`
+        `${API_ENDPOINT}/news?title=${searchQuery}&limit=6&page=${pageNum}`,
       );
       const data = await res.json();
 
       if (data.news.length > 0) {
-        setSearchResults(pageNum === 1 ? data.news : [...searchResults, ...data.news]);
+        setSearchResults(
+          pageNum === 1 ? data.news : [...searchResults, ...data.news],
+        );
         if (data.news.length < 6) {
           setHasMore(false);
         }
@@ -125,16 +130,20 @@ const Navbar = () => {
     return html.replace(/<[^>]*>/g, "");
   };
 
+
   return (
     <>
-      <nav className="bg-black text-white sticky top-0 z-20 shadow-lg">
+      <nav className="bg-black text-white sticky top-0 z-20 shadow-lg px-6">
         <div className="w-full xl:w-[80%] mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link to="/" className="flex items-center group">
-              <span className="text-2xl font-bold tracking-tight">
-                THE<span className="text-orange-500">WIRE</span>
-              </span>
+            <Link to="/" className="flex font-light items-center group">
+              <p className="text-2xl flex items-center gap-0.5">
+                <span>fakt</span>
+                <span className="text-orange-500 flex items-center ">
+                  news
+                </span>
+              </p>
             </Link>
 
             {/* Desktop Navigation */}
@@ -154,10 +163,10 @@ const Navbar = () => {
             <div className="flex items-center space-x-2">
               <button
                 onClick={openSearchModal}
-                className="p-2 hover:bg-orange-500 rounded-md transition-all duration-200"
+                className="p-2 hover:bg-orange-500 cursor-pointer rounded-md transition-all duration-200"
                 aria-label="Search"
               >
-                <Search className="w-5 h-5" />
+                <Search className="w-5 h-5 cursor-pointer" />
               </button>
 
               {/* Mobile Menu Button */}
@@ -166,7 +175,11 @@ const Navbar = () => {
                 className="md:hidden p-2 hover:bg-orange-500 rounded-md transition-all duration-200"
                 aria-label="Menu"
               >
-                {showMobileMenu ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                {showMobileMenu ? (
+                  <X className="w-6 h-6 cursor-pointer" />
+                ) : (
+                  <Menu className="w-6 h-6 cursor-pointer" />
+                )}
               </button>
             </div>
           </div>
@@ -181,9 +194,9 @@ const Navbar = () => {
                     setShowMobileMenu(false);
                     openSearchModal();
                   }}
-                  className="w-full flex items-center space-x-3 bg-gray-900 rounded-lg px-4 py-3 hover:bg-gray-800 transition-colors"
+                  className="w-full flex items-center cursor-pointer space-x-3 bg-gray-900 rounded-lg px-4 py-3 hover:bg-gray-800 transition-colors"
                 >
-                  <Search className="w-4 h-4 text-gray-500" />
+                  <Search className="w-4 h-4 text-gray-500 cursor-pointer" />
                   <span className="text-gray-500 text-sm">Xəbər axtar...</span>
                 </button>
               </div>
@@ -205,23 +218,23 @@ const Navbar = () => {
                         {category.name}
                       </span>
                     </div>
-                    <svg
-                      className="w-4 h-4 text-gray-600 group-hover:text-white transition-colors"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
+                    <ChevronRight className="w-4 h-4 text-gray-600 group-hover:text-white transition-colors" />
                   </Link>
                 ))}
               </div>
 
               {/* Footer */}
               <div className="border-t border-gray-800 mt-2 px-3 py-3">
-                <p className="text-xs text-gray-600 text-center">
-                  THE<span className="text-orange-500">WIRE</span> © 2025
-                </p>
+                <Link to="/" className="flex font-light items-center group">
+                  <p className="text-2xl flex items-center gap-0.5">
+                    <span>fakt</span>
+                    <span className="text-orange-500 flex items-center ">
+                      gl
+                      <Globe className="w-4 h-4 mx-0.5" strokeWidth={2} />
+                      bal
+                    </span>
+                  </p>
+                </Link>
               </div>
             </div>
           )}
@@ -233,7 +246,7 @@ const Navbar = () => {
 
       {/* Search Modal */}
       {showSearchModal && (
-        <div className="fixed inset-0 z-[60] flex items-start justify-center px-4 sm:px-6 pt-16 sm:pt-20">
+        <div className="fixed inset-0 z-60 flex items-start justify-center px-4 sm:px-6 pt-16 sm:pt-20">
           {/* Black Background with Opacity */}
           <div className="absolute inset-0 bg-black opacity-60"></div>
 
@@ -265,9 +278,9 @@ const Navbar = () => {
                 />
                 <button
                   onClick={() => setShowSearchModal(false)}
-                  className="p-2 hover:bg-orange-100 rounded-lg transition-colors shrink-0"
+                  className="p-2 hover:bg-orange-100  rounded-lg transition-colors cursor-pointer shrink-0"
                 >
-                  <X className="w-5 h-5 text-gray-600" />
+                  <X className="w-5 h-5 text-gray-600 cursor-pointer" />
                 </button>
               </div>
             </div>
@@ -291,13 +304,13 @@ const Navbar = () => {
               ) : searchResults.length > 0 ? (
                 <div className="p-2">
                   <p className="text-xs text-gray-500 px-3 py-2 font-semibold uppercase">
-                   Ən azı {searchResults.length} nəticə tapıldı
+                    Ən azı {searchResults.length} nəticə tapıldı
                   </p>
                   {searchResults.map((result) => (
                     <button
                       key={result._id}
                       onClick={() => handleResultClick(result._id)}
-                      className="w-full text-left px-3 py-3 hover:bg-orange-50 rounded-lg transition-colors border-b border-gray-100 last:border-b-0"
+                      className="w-full cursor-pointer text-left px-3 py-3 hover:bg-orange-50 rounded-lg transition-colors border-b border-gray-100 last:border-b-0"
                     >
                       <div className="flex items-start space-x-3">
                         <div className="flex-1 min-w-0">
@@ -341,19 +354,7 @@ const Navbar = () => {
                 </div>
               ) : searchQuery.trim() && !isSearching ? (
                 <div className="flex flex-col items-center justify-center py-12">
-                  <svg
-                    className="w-16 h-16 text-gray-400 mb-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
+                  <Frown className="w-16 h-16 text-gray-400 mb-4" />
                   <p className="text-gray-600 font-medium">Xəbər tapılmadı</p>
                   <p className="text-sm text-gray-400 mt-1">
                     Başqa açar sözlər sınayın

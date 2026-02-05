@@ -5,7 +5,8 @@ export interface News {
   date: string;
   category: string;
   author: string;
-  description:string
+  description: string;
+  thumbnail: string;
 }
 
 export interface ApiResponse {
@@ -15,15 +16,18 @@ export interface ApiResponse {
 }
 
 export const CATEGORIES = [
-  { name: "Siyasət", value: "politic" },
-  { name: "Dünya", value: "world" },
-  { name: "İqtisadiyyat", value: "economy" },
+  { name: "Siyasət", value: "siyaset" },
+  { name: "Dünya", value: "dunya" },
+  { name: "Cəmiyyət", value: "cemiyyet" },
+  { name: "İqtisadiyyat", value: "iqtisadiyyat" },
+  { name: "Məqalələr", value: "meqaleler" },
+  { name: "Texnalogiya", value: "texnalogiya" },
 ];
 
- export const quickLinks = [
-    { name: "About Us", path: "/about" },
-    { name: "Contact", path: "/contact" },
-    { name: "Advertise", path: "/ads" },
-    { name: "Privacy Policy", path: "/privacy" },
-    { name: "Terms of Service", path: "/terms" },
-  ];
+export const quickLinks = [
+  { name: "About Us", path: "/about" },
+  { name: "Contact", path: "/contact" },
+  { name: "Advertise", path: "/ads" },
+  { name: "Privacy Policy", path: "/privacy" },
+  { name: "Terms of Service", path: "/terms" },
+];
