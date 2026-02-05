@@ -101,10 +101,10 @@ const HomePage = () => {
                 <h2 className="text-2xl font-bold text-gray-900">
                   Latest News
                 </h2>
-                <div className="h-1 flex-1 bg-gradient-to-r from-orange-500 to-transparent ml-4"></div>
+                <div className="h-1 flex-1 bg-linear-to-r from-orange-500 to-transparent ml-4"></div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {news.map((item) => (
                   <NewsCard key={item._id} news={item} />
                 ))}

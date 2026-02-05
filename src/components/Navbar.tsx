@@ -1,8 +1,36 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CATEGORIES, type News } from "../types";
-import { Search, X, Menu, Globe, ChevronRight, Frown } from "lucide-react";
+import {
+  Search,
+  X,
+  Menu,
+  ChevronRight,
+  Frown,
+  Sparkles,
+  TrendingUp,
+  Flame,
+  Globe,
+  Briefcase,
+  Trophy,
+  Zap,
+  Film,
+  Cpu,
+} from "lucide-react";
 import { API_ENDPOINT } from "../constants/urls";
+
+// Icon mapping for each category
+const CATEGORY_ICONS: Record<string, unknown> = {
+  "son-xeberler": TrendingUp,
+  dunya: Globe,
+  iqtisadiyyat: Briefcase,
+  idman: Trophy,
+  siyaset: Flame,
+  texnologiya: Cpu,
+  medeniyyet: Film,
+  default: Zap,
+};
 
 const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -12,9 +40,26 @@ const Navbar = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+  const [scrolled, setScrolled] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
   const observerRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+
+  // Get icon component for a category
+  const getCategoryIcon = (categoryValue: string) => {
+    const IconComponent =
+      CATEGORY_ICONS[categoryValue] || CATEGORY_ICONS.default;
+    return IconComponent;
+  };
+
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Debounce search
   useEffect(() => {
@@ -130,140 +175,264 @@ const Navbar = () => {
     return html.replace(/<[^>]*>/g, "");
   };
 
-
   return (
     <>
-      <nav className="bg-black text-white sticky top-0 z-20 shadow-lg px-6">
-        <div className="w-full xl:w-[80%] mx-auto px-4 py-3">
+      <nav
+        className={`
+          bg-black
+          text-white sticky top-0 z-20 
+          transition-all duration-300
+          ${scrolled ? "shadow-2xl backdrop-blur-lg bg-opacity-95" : "shadow-lg"}
+        `}
+      >
+        {/* Animated top border */}
+        <div className="h-0.5 bg-linear-to-r from-transparent via-orange-500 to-transparent animate-pulse"></div>
+
+        <div className="w-full xl:w-[80%] mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            {/* Logo */}
-            <Link to="/" className="flex font-light items-center group">
-              <p className="text-2xl flex items-center gap-0.5">
-                <span>fakt</span>
-                <span className="text-orange-500 flex items-center ">
-                  news
-                </span>
-              </p>
+            {/* Enhanced Logo */}
+            <Link
+              to="/"
+              className="flex font-light items-center group relative cursor-pointer"
+            >
+              {/* Glow effect */}
+              <div className="absolute -inset-3 bg-linear-to-r from-orange-600 via-red-500 to-orange-600 rounded-xl opacity-0 group-hover:opacity-30 blur-xl transition-all duration-500"></div>
+
+              {/* Logo container */}
+              <div className="relative bg-linear-to-r from-gray-900 to-black px-4 py-2 rounded-xl border border-gray-800 group-hover:border-orange-500 transition-all duration-300 shadow-lg group-hover:shadow-orange-500/20">
+                <p className="text-3xl md:text-4xl flex items-center gap-1 relative">
+                  {/* "fakt" part */}
+                  <span className="font-black tracking-tight bg-linear-to-br from-white via-gray-100 to-gray-300 bg-clip-text text-transparent drop-shadow-lg">
+                    fakt
+                  </span>
+
+                  {/* Separator */}
+                  <span className="w-1 h-8 bg-linear-to-b from-orange-500 to-red-500 rounded-full mx-1 group-hover:scale-y-110 transition-transform duration-300"></span>
+
+                  {/* "news" part */}
+                  <span className="font-black tracking-tight bg-linear-to-br from-orange-500 via-orange-400 to-red-500 bg-clip-text text-transparent drop-shadow-lg animate-gradient flex items-center">
+                    news
+                  </span>
+
+                  {/* Sparkle effect */}
+                  <Sparkles className="w-5 h-5 text-orange-500 ml-2 opacity-0 group-hover:opacity-100 group-hover:rotate-12 transition-all duration-300 drop-shadow-lg" />
+                </p>
+
+                {/* Subtitle */}
+                <div className="absolute -bottom-0.5 right-2 text-[10px] font-bold text-orange-500 opacity-60 uppercase tracking-wider">
+                  Son Xəbərlər
+                </div>
+              </div>
             </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-1">
-              {CATEGORIES.map((category) => (
-                <Link
-                  key={category.value}
-                  to={`/category/${category.value}`}
-                  className="px-4 py-2 text-lg cursor-pointer rounded-md hover:bg-orange-500 hover:text-white transition-all duration-200"
-                >
-                  {category.name}
-                </Link>
-              ))}
+            {/* Desktop Navigation with enhanced styling and icons */}
+            <div className="hidden md:flex items-center space-x-2">
+              {CATEGORIES.map((category, index) => {
+                const isActive =
+                  window.location.pathname === `/category/${category.value}`;
+                const CategoryIcon = getCategoryIcon(category.value);
+
+                return (
+                  <Link
+                    key={category.value}
+                    to={`/category/${category.value}`}
+                    className={`
+                      relative px-5 py-3 text-base font-semibold
+                      rounded-xl overflow-hidden
+                      transition-all duration-300
+                      hover:text-white cursor-pointer
+                      group
+                      ${isActive ? "text-white bg-linear-to-r from-orange-600 to-orange-500" : ""}
+                    `}
+                    style={{ animationDelay: `${index * 0.1}s` }}
+                  >
+                    {/* Background gradient on hover (only if not active) */}
+                    {!isActive && (
+                      <span className="absolute inset-0 bg-linear-to-r from-orange-600 to-orange-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-xl"></span>
+                    )}
+
+                    {/* Border accent */}
+                    <span
+                      className={`
+                      absolute bottom-0 left-0 w-full h-0.5 bg-linear-to-r from-orange-500 to-red-500
+                      ${isActive ? "scale-x-100" : "transform scale-x-0 group-hover:scale-x-100"}
+                      transition-transform duration-300
+                    `}
+                    ></span>
+
+                    <span className="relative z-10 flex items-center gap-2">
+                      <CategoryIcon
+                        className={`w-4 h-4 transition-all duration-300 ${
+                          isActive
+                            ? "text-white"
+                            : "text-orange-500 group-hover:text-white group-hover:scale-110"
+                        }`}
+                      />
+                      {category.name}
+                    </span>
+
+                    {/* Active indicator dot */}
+                    {isActive && (
+                      <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+                    )}
+                  </Link>
+                );
+              })}
             </div>
 
             {/* Search Icon + Mobile Menu Button */}
             <div className="flex items-center space-x-2">
+              {/* Enhanced Search Button */}
               <button
                 onClick={openSearchModal}
-                className="p-2 hover:bg-orange-500 cursor-pointer rounded-md transition-all duration-200"
+                className="
+                  relative p-2.5 rounded-lg
+                  bg-linear-to-r from-gray-800 to-gray-900
+                  hover:from-orange-600 hover:to-orange-500
+                  transition-all duration-300
+                  group overflow-hidden cursor-pointer
+                "
                 aria-label="Search"
               >
-                <Search className="w-5 h-5 cursor-pointer" />
+                <span className="absolute inset-0 bg-linear-to-r from-orange-400 to-red-500 opacity-0 group-hover:opacity-20 blur-lg transition-opacity duration-300"></span>
+                <Search className="w-5 h-5 relative z-10 group-hover:scale-110 transition-transform duration-300 cursor-pointer" />
               </button>
 
-              {/* Mobile Menu Button */}
+              {/* Enhanced Mobile Menu Button */}
               <button
                 onClick={() => setShowMobileMenu(!showMobileMenu)}
-                className="md:hidden p-2 hover:bg-orange-500 rounded-md transition-all duration-200"
+                className="
+                  md:hidden relative p-2.5 rounded-lg
+                  bg-linear-to-r from-gray-800 to-gray-900
+                  hover:from-orange-600 hover:to-orange-500
+                  transition-all duration-300
+                  group overflow-hidden cursor-pointer
+                "
                 aria-label="Menu"
               >
+                <span className="absolute inset-0 bg-linear-to-r from-orange-400 to-red-500 opacity-0 group-hover:opacity-20 blur-lg transition-opacity duration-300"></span>
                 {showMobileMenu ? (
-                  <X className="w-6 h-6 cursor-pointer" />
+                  <X className="w-6 h-6 relative z-10 group-hover:rotate-90 transition-transform duration-300 cursor-pointer" />
                 ) : (
-                  <Menu className="w-6 h-6 cursor-pointer" />
+                  <Menu className="w-6 h-6 relative z-10 group-hover:scale-110 transition-transform duration-300 cursor-pointer" />
                 )}
               </button>
             </div>
           </div>
 
-          {/* Mobile Menu */}
+          {/* Enhanced Mobile Menu */}
           {showMobileMenu && (
-            <div className="md:hidden mt-3 border-t border-gray-800 bg-black">
+            <div className="md:hidden mt-4 border-t border-gray-800 bg-linear-to-b from-black to-gray-950 rounded-b-2xl overflow-hidden animate-slideDown">
               {/* Mobile Search Bar */}
-              <div className="px-3 py-3 border-b border-gray-800">
+              <div className="px-3 py-4 border-b border-gray-800">
                 <button
                   onClick={() => {
                     setShowMobileMenu(false);
                     openSearchModal();
                   }}
-                  className="w-full flex items-center cursor-pointer space-x-3 bg-gray-900 rounded-lg px-4 py-3 hover:bg-gray-800 transition-colors"
+                  className="
+                    w-full flex items-center space-x-3
+                    bg-linear-to-r from-gray-900 to-gray-800
+                    rounded-xl px-4 py-3.5
+                    hover:from-orange-900 hover:to-orange-800
+                    transition-all duration-300
+                    group border border-gray-700 cursor-pointer
+                  "
                 >
-                  <Search className="w-4 h-4 text-gray-500 cursor-pointer" />
-                  <span className="text-gray-500 text-sm">Xəbər axtar...</span>
+                  <Search className="w-4 h-4 text-gray-400 group-hover:text-orange-400 transition-colors cursor-pointer" />
+                  <span className="text-gray-400 group-hover:text-orange-300 text-sm transition-colors">
+                    Xəbər axtar...
+                  </span>
                 </button>
               </div>
 
-              {/* Category Links */}
-              <div className="py-2 px-3 space-y-1">
-                {CATEGORIES.map((category, index) => (
-                  <Link
-                    key={category.value}
-                    to={`/category/${category.value}`}
-                    onClick={() => setShowMobileMenu(false)}
-                    className="flex items-center justify-between px-4 py-3 rounded-lg hover:bg-orange-500 transition-all duration-200 group"
-                  >
-                    <div className="flex items-center space-x-3">
-                      <span className="text-xs font-bold text-orange-500 group-hover:text-white w-5 text-right">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                      <span className="text-sm font-medium text-gray-200 group-hover:text-white">
-                        {category.name}
-                      </span>
-                    </div>
-                    <ChevronRight className="w-4 h-4 text-gray-600 group-hover:text-white transition-colors" />
-                  </Link>
-                ))}
-              </div>
+              {/* Enhanced Category Links with Icons */}
+              <div className="py-3 px-3 space-y-2">
+                {CATEGORIES.map((category, index) => {
+                  const isActive =
+                    window.location.pathname === `/category/${category.value}`;
+                  const CategoryIcon = getCategoryIcon(category.value);
 
-              {/* Footer */}
-              <div className="border-t border-gray-800 mt-2 px-3 py-3">
-                <Link to="/" className="flex font-light items-center group">
-                  <p className="text-2xl flex items-center gap-0.5">
-                    <span>fakt</span>
-                    <span className="text-orange-500 flex items-center ">
-                      gl
-                      <Globe className="w-4 h-4 mx-0.5" strokeWidth={2} />
-                      bal
-                    </span>
-                  </p>
-                </Link>
+                  return (
+                    <Link
+                      key={category.value}
+                      to={`/category/${category.value}`}
+                      onClick={() => setShowMobileMenu(false)}
+                      className={`
+                        flex items-center justify-between px-4 py-3.5
+                        rounded-xl
+                        ${
+                          isActive
+                            ? "bg-linear-to-r from-orange-600 to-orange-500 border-orange-500"
+                            : "bg-linear-to-r from-gray-900 to-gray-800 border-gray-800 hover:from-orange-600 hover:to-orange-500 hover:border-orange-500"
+                        }
+                        transition-all duration-300
+                        group border cursor-pointer
+                        ${isActive ? "shadow-lg shadow-orange-500/20" : "hover:shadow-lg hover:shadow-orange-500/20"}
+                      `}
+                      style={{
+                        animation: `slideInRight 0.3s ease-out ${index * 0.05}s both`,
+                      }}
+                    >
+                      <div className="flex items-center space-x-3">
+                        <CategoryIcon
+                          className={`
+                          w-5 h-5 transition-all duration-300
+                          ${
+                            isActive
+                              ? "text-white"
+                              : "text-orange-500 group-hover:text-white"
+                          }
+                        `}
+                        />
+                        <span
+                          className={`text-sm font-medium transition-colors ${isActive ? "text-white" : "text-gray-200 group-hover:text-white"}`}
+                        >
+                          {category.name}
+                        </span>
+                      </div>
+                      <ChevronRight
+                        className={`w-4 h-4 transition-all duration-300 ${isActive ? "text-white translate-x-1" : "text-gray-600 group-hover:text-white group-hover:translate-x-1"}`}
+                      />
+                    </Link>
+                  );
+                })}
               </div>
             </div>
           )}
         </div>
 
-        {/* Orange Line */}
-        <div className="h-1 bg-linear-to-r from-orange-600 via-orange-500 to-orange-600"></div>
+        {/* Enhanced animated bottom border */}
+        <div className="h-1 bg-linear-to-r from-orange-600 via-orange-500 to-red-500 relative overflow-hidden">
+          <div className="absolute inset-0 bg-linear-to-r from-transparent via-white to-transparent opacity-30 animate-shimmer"></div>
+        </div>
       </nav>
 
-      {/* Search Modal */}
+      {/* Enhanced Search Modal */}
       {showSearchModal && (
-        <div className="fixed inset-0 z-60 flex items-start justify-center px-4 sm:px-6 pt-16 sm:pt-20">
-          {/* Black Background with Opacity */}
+        <div className="fixed inset-0 z-50 flex items-start justify-center px-4 sm:px-6 pt-16 sm:pt-20 animate-fadeIn">
+          {/* Enhanced Background with better opacity */}
           <div className="absolute inset-0 bg-black opacity-60"></div>
 
           {/* Search Modal Content */}
           <div
             ref={searchRef}
             className="
-              bg-white relative z-10 rounded-xl shadow-2xl
+              bg-white
+              relative z-10 rounded-2xl shadow-2xl
               w-full sm:w-[90%] md:w-[70%] lg:w-[50%] xl:w-[45%]
               max-h-[85vh] sm:max-h-[80vh]
-              overflow-hidden flex flex-col animate-fadeIn
+              overflow-hidden flex flex-col
+              border border-orange-200
+              animate-scaleIn
             "
           >
             {/* Search Header */}
-            <div className="p-4 border-b border-gray-200 bg-linear-to-r from-orange-50 to-white">
+            <div className="p-5 border-b border-orange-200 bg-linear-to-r from-orange-50 via-white to-orange-50">
               <div className="flex items-center space-x-3">
-                <Search className="w-5 h-5 text-orange-500 shrink-0" />
+                <div className="p-2 bg-linear-to-r from-orange-500 to-red-500 rounded-lg">
+                  <Search className="w-5 h-5 text-white" />
+                </div>
                 <input
                   type="text"
                   value={searchQuery}
@@ -274,58 +443,84 @@ const Navbar = () => {
                   }}
                   placeholder="Xəbər axtar..."
                   autoFocus
-                  className="flex-1 outline-none text-gray-900 text-lg bg-transparent placeholder-gray-400 min-w-0"
+                  className="
+                    flex-1 outline-none text-gray-900 text-lg
+                    bg-transparent placeholder-gray-400 min-w-0
+                    font-medium
+                  "
                 />
                 <button
                   onClick={() => setShowSearchModal(false)}
-                  className="p-2 hover:bg-orange-100  rounded-lg transition-colors cursor-pointer shrink-0"
+                  className="
+                    p-2 hover:bg-orange-100 rounded-lg
+                    transition-all duration-200
+                    group cursor-pointer
+                  "
                 >
-                  <X className="w-5 h-5 text-gray-600 cursor-pointer" />
+                  <X className="w-5 h-5 text-gray-600 group-hover:text-orange-600 group-hover:rotate-90 transition-all duration-300 cursor-pointer" />
                 </button>
               </div>
             </div>
 
             {/* Search Results */}
-            <div className="flex-1 overflow-y-auto">
+            <div className="flex-1 overflow-y-auto bg-white">
               {isSearching && page === 1 ? (
-                <div className="flex justify-center items-center py-12">
+                <div className="flex justify-center items-center py-16">
                   <div className="flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-orange-500 rounded-full animate-bounce"></div>
+                    <div className="w-3 h-3 bg-linear-to-r from-orange-500 to-red-500 rounded-full animate-bounce"></div>
                     <div
-                      className="w-2 h-2 bg-orange-500 rounded-full animate-bounce"
+                      className="w-3 h-3 bg-linear-to-r from-orange-500 to-red-500 rounded-full animate-bounce"
                       style={{ animationDelay: "0.1s" }}
                     ></div>
                     <div
-                      className="w-2 h-2 bg-orange-500 rounded-full animate-bounce"
+                      className="w-3 h-3 bg-linear-to-r from-orange-500 to-red-500 rounded-full animate-bounce"
                       style={{ animationDelay: "0.2s" }}
                     ></div>
                   </div>
                 </div>
               ) : searchResults.length > 0 ? (
-                <div className="p-2">
-                  <p className="text-xs text-gray-500 px-3 py-2 font-semibold uppercase">
+                <div className="p-3">
+                  <p className="text-xs text-gray-500 px-3 py-2 font-semibold uppercase flex items-center gap-2">
+                    <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
                     Ən azı {searchResults.length} nəticə tapıldı
                   </p>
-                  {searchResults.map((result) => (
+                  {searchResults.map((result, index) => (
                     <button
                       key={result._id}
                       onClick={() => handleResultClick(result._id)}
-                      className="w-full cursor-pointer text-left px-3 py-3 hover:bg-orange-50 rounded-lg transition-colors border-b border-gray-100 last:border-b-0"
+                      className="
+                        w-full text-left px-4 py-4
+                        hover:bg-orange-50
+                        rounded-xl transition-all duration-300
+                        border-b border-gray-100 last:border-b-0
+                        group cursor-pointer
+                        hover:shadow-md
+                      "
+                      style={{
+                        animation: `slideInUp 0.3s ease-out ${index * 0.05}s both`,
+                      }}
                     >
                       <div className="flex items-start space-x-3">
                         <div className="flex-1 min-w-0">
-                          <div className="flex items-center space-x-2 mb-1">
-                            <span className="text-xs bg-orange-500 text-white px-2 py-0.5 rounded uppercase font-semibold">
+                          <div className="flex items-center space-x-2 mb-2">
+                            <span
+                              className="
+                              text-xs bg-linear-to-r from-orange-500 to-red-500
+                              text-white px-3 py-1 rounded-full uppercase font-bold
+                              shadow-md group-hover:shadow-lg
+                              transition-shadow duration-300
+                            "
+                            >
                               {result.category}
                             </span>
                           </div>
-                          <h4 className="text-sm font-semibold text-gray-900 line-clamp-2 mb-1">
+                          <h4 className="text-sm font-bold text-gray-900 line-clamp-2 mb-2 group-hover:text-orange-600 transition-colors">
                             {result.title}
                           </h4>
-                          <p className="text-xs text-gray-600 line-clamp-2">
+                          <p className="text-xs text-gray-600 line-clamp-2 leading-relaxed">
                             {result.description || stripHtml(result.body || "")}
                           </p>
-                          <p className="text-xs text-gray-400 mt-1">
+                          <p className="text-xs text-gray-400 mt-2 font-medium">
                             {result.author}
                           </p>
                         </div>
@@ -335,16 +530,16 @@ const Navbar = () => {
 
                   {/* Load More Indicator */}
                   {hasMore && (
-                    <div ref={observerRef} className="flex justify-center py-4">
+                    <div ref={observerRef} className="flex justify-center py-6">
                       {isSearching && (
                         <div className="flex items-center space-x-2">
-                          <div className="w-2 h-2 bg-orange-500 rounded-full animate-bounce"></div>
+                          <div className="w-2 h-2 bg-linear-to-r from-orange-500 to-red-500 rounded-full animate-bounce"></div>
                           <div
-                            className="w-2 h-2 bg-orange-500 rounded-full animate-bounce"
+                            className="w-2 h-2 bg-linear-to-r from-orange-500 to-red-500 rounded-full animate-bounce"
                             style={{ animationDelay: "0.1s" }}
                           ></div>
                           <div
-                            className="w-2 h-2 bg-orange-500 rounded-full animate-bounce"
+                            className="w-2 h-2 bg-linear-to-r from-orange-500 to-red-500 rounded-full animate-bounce"
                             style={{ animationDelay: "0.2s" }}
                           ></div>
                         </div>
@@ -353,23 +548,125 @@ const Navbar = () => {
                   )}
                 </div>
               ) : searchQuery.trim() && !isSearching ? (
-                <div className="flex flex-col items-center justify-center py-12">
-                  <Frown className="w-16 h-16 text-gray-400 mb-4" />
-                  <p className="text-gray-600 font-medium">Xəbər tapılmadı</p>
-                  <p className="text-sm text-gray-400 mt-1">
+                <div className="flex flex-col items-center justify-center py-16">
+                  <div className="p-4 bg-orange-100 rounded-full mb-4">
+                    <Frown className="w-16 h-16 text-orange-500" />
+                  </div>
+                  <p className="text-gray-700 font-bold text-lg">
+                    Xəbər tapılmadı
+                  </p>
+                  <p className="text-sm text-gray-500 mt-2">
                     Başqa açar sözlər sınayın
                   </p>
                 </div>
               ) : (
-                <div className="flex flex-col items-center justify-center py-12">
-                  <Search className="w-16 h-16 text-orange-300 mb-4" />
-                  <p className="text-gray-500">Xəbər axtarmaq üçün yazın</p>
+                <div className="flex flex-col items-center justify-center py-16">
+                  <div className="p-4 bg-linear-to-r from-orange-100 to-red-100 rounded-full mb-4 animate-pulse">
+                    <Search className="w-16 h-16 text-orange-500" />
+                  </div>
+                  <p className="text-gray-600 font-medium">
+                    Xəbər axtarmaq üçün yazın
+                  </p>
                 </div>
               )}
             </div>
           </div>
         </div>
       )}
+
+      <style>{`
+        @keyframes slideDown {
+          from {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes slideInRight {
+          from {
+            opacity: 0;
+            transform: translateX(-20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes slideInUp {
+          from {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+        @keyframes scaleIn {
+          from {
+            opacity: 0;
+            transform: scale(0.95);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+
+        @keyframes shimmer {
+          0% {
+            transform: translateX(-100%);
+          }
+          100% {
+            transform: translateX(100%);
+          }
+        }
+
+        @keyframes gradient {
+          0%, 100% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+        }
+
+        .animate-slideDown {
+          animation: slideDown 0.3s ease-out;
+        }
+
+        .animate-fadeIn {
+          animation: fadeIn 0.3s ease-out;
+        }
+
+        .animate-scaleIn {
+          animation: scaleIn 0.3s ease-out;
+        }
+
+        .animate-shimmer {
+          animation: shimmer 2s infinite;
+        }
+
+        .animate-gradient {
+          background-size: 200% 200%;
+          animation: gradient 3s ease infinite;
+        }
+      `}</style>
     </>
   );
 };

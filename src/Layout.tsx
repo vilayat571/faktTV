@@ -19,7 +19,8 @@ const Layout = ({ children }: { children: ReactNode }) => {
                 transform: 'rotate(180deg)'
               }}
             >
-              Advertisement Area
+                          Burada Sizin Reklamınız Ola Bilər. <br /> Əlaqə nömrəsi: +994 50 890 87 27
+
             </span>
           </div>
         </aside>
@@ -40,7 +41,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
                 transform: 'rotate(180deg)'
               }}
             >
-              Advertisement Area
+              Burada Sizin Reklamınız Ola Bilər. <br /> Əlaqə nömrəsi: +994 50 890 87 27
             </span>
           </div>
         </aside>
