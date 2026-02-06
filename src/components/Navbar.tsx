@@ -200,17 +200,17 @@ const Navbar = () => {
 
               {/* Logo container */}
               <div className="relative bg-linear-to-r from-gray-900 to-black px-4 py-2 rounded-xl border border-gray-800 group-hover:border-orange-500 transition-all duration-300 shadow-lg group-hover:shadow-orange-500/20">
-                <p className="text-3xl md:text-4xl flex items-center gap-1 relative">
+                <p className="text-3xl md:text-4xl flex items-center tracking-widest gap-1 relative">
                   {/* "fakt" part */}
-                  <span className="font-black tracking-tight bg-linear-to-br from-white via-gray-100 to-gray-300 bg-clip-text text-transparent drop-shadow-lg">
-                    fakt
+                  <span className="font-black tracking-wide bg-linear-to-br  from-white via-gray-100 to-gray-300 bg-clip-text text-transparent drop-shadow-lg">
+                    fact
                   </span>
 
                   {/* Separator */}
-                  <span className="w-1 h-8 bg-linear-to-b from-orange-500 to-red-500 rounded-full mx-1 group-hover:scale-y-110 transition-transform duration-300"></span>
+                  <span className="w-0.75 h-8 bg-linear-to-b from-orange-500 to-red-500 rounded-full mx-0.5 group-hover:scale-y-110 transition-transform duration-300"></span>
 
                   {/* "news" part */}
-                  <span className="font-black tracking-tight bg-linear-to-br from-orange-500 via-orange-400 to-red-500 bg-clip-text text-transparent drop-shadow-lg animate-gradient flex items-center">
+                  <span className="font-black tracking-wide bg-linear-to-br from-orange-500 via-orange-400 to-red-500 bg-clip-text text-transparent drop-shadow-lg animate-gradient flex items-center">
                     news
                   </span>
 
