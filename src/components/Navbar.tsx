@@ -17,11 +17,12 @@ import {
   Zap,
   Film,
   Cpu,
+  type LucideIcon,
 } from "lucide-react";
 import { API_ENDPOINT } from "../constants/urls";
 
 // Icon mapping for each category
-const CATEGORY_ICONS: Record<string, unknown> = {
+const CATEGORY_ICONS: Record<string, LucideIcon> = {
   "son-xeberler": TrendingUp,
   dunya: Globe,
   iqtisadiyyat: Briefcase,
@@ -46,10 +47,8 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   // Get icon component for a category
-  const getCategoryIcon = (categoryValue: string) => {
-    const IconComponent =
-      CATEGORY_ICONS[categoryValue] || CATEGORY_ICONS.default;
-    return IconComponent;
+  const getCategoryIcon = (categoryValue: string): LucideIcon => {
+    return CATEGORY_ICONS[categoryValue] || CATEGORY_ICONS.default;
   };
 
   // Handle scroll effect
