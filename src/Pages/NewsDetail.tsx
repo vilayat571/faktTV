@@ -6,6 +6,7 @@ import { Type } from "lucide-react";
 import NewsCard from "../components/NewsCard";
 import { API_ENDPOINT } from "../constants/urls";
 import { fetchNewsById } from "../utils/api";
+import { useMetaTags } from "../hooks/useMetaTags";
 import 'react-quill-new/dist/quill.snow.css';
 import 'quill/dist/quill.snow.css';
 
@@ -17,6 +18,45 @@ const NewsDetail = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const [fontSize, setFontSize] = useState(16);
+
+  // Helper function to strip HTML tags from body
+  const stripHtml = (html: string) => {
+    const tmp = document.createElement('div');
+    tmp.innerHTML = html;
+    return tmp.textContent || tmp.innerText || '';
+  };
+
+  // Helper function to generate clean description
+  const generateDescription = (body: string, maxLength: number = 160) => {
+    const text = stripHtml(body);
+    return text.length > maxLength 
+      ? text.substring(0, maxLength).trim() + '...' 
+      : text;
+  };
+
+  // Generate keywords from title and category
+  const generateKeywords = (title: string, category: string) => {
+    const titleWords = title
+      .toLowerCase()
+      .split(' ')
+      .filter(word => word.length > 3)
+      .slice(0, 5)
+      .join(', ');
+    
+    return `${category}, ${titleWords}, Fact News, Azərbaycan xəbərləri, son xəbərlər`;
+  };
+
+  // Dynamic meta tags - only set when news data is loaded
+  useMetaTags({
+    title: news?.title || 'Xəbər Yüklənir',
+    description: news?.description || (news?.body ? generateDescription(news.body) : 'Fact News - Azərbaycan və dünya xəbərləri'),
+    image: news?.image || 'https://www.fact-news.info/og-image.jpg',
+    url: `https://www.fact-news.info/news/${id}`,
+    author: news?.author,
+    publishedTime: news?.date,
+    category: news?.category,
+    keywords: news ? generateKeywords(news.title, news.category) : undefined,
+  });
 
   useEffect(() => {
     if (!id) return;
@@ -94,7 +134,7 @@ const NewsDetail = () => {
   };
 
   const formatDate = (date: string) =>
-    new Date(date).toLocaleDateString("en-US", {
+    new Date(date).toLocaleDateString("az-AZ", {
       year: "numeric",
       month: "long",
       day: "numeric",
@@ -157,7 +197,7 @@ const NewsDetail = () => {
         <div className="px-5">
           <button
             onClick={() => navigate(-1)}
-            className="mt-5  mb-12 border bg-black cursor-pointer text-white flex text-lg px-5 py-3 rounded gap-2 items-center justify-center hover:bg-gray-800 transition-colors"
+            className="mt-5 mb-12 border bg-black cursor-pointer text-white flex text-lg px-5 py-3 rounded gap-2 items-center justify-center hover:bg-gray-800 transition-colors"
           >
             <span>Geri</span>
           </button>
@@ -180,7 +220,7 @@ const NewsDetail = () => {
                   <Type className="w-4 h-4 text-gray-600" />
                   <button
                     onClick={decreaseFontSize}
-                    className="px-3 cursor-pointer  py-1 bg-white rounded hover:bg-gray-200 transition-colors text-sm font-medium"
+                    className="px-3 cursor-pointer py-1 bg-white rounded hover:bg-gray-200 transition-colors text-sm font-medium"
                     title="Mətn ölçüsünü azalt"
                   >
                     A-
@@ -194,7 +234,7 @@ const NewsDetail = () => {
                   </button>
                   <button
                     onClick={increaseFontSize}
-                    className="px-3 cursor-pointer  py-1 bg-white rounded hover:bg-gray-200 transition-colors text-sm font-medium"
+                    className="px-3 cursor-pointer py-1 bg-white rounded hover:bg-gray-200 transition-colors text-sm font-medium"
                     title="Mətn ölçüsünü artır"
                   >
                     A+
@@ -204,7 +244,7 @@ const NewsDetail = () => {
             </div>
 
             {/* Full HTML content with Quill styling */}
-         <div className="p-8">
+            <div className="p-8">
               <div
                 className="ql-editor"
                 dangerouslySetInnerHTML={{ __html: news.body }}

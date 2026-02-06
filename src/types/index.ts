@@ -7,6 +7,7 @@ export interface News {
   author: string;
   description: string;
   thumbnail: string;
+  image: string;
 }
 
 export interface ApiResponse {
