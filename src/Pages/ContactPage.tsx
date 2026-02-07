@@ -57,7 +57,7 @@ export function ContactPage() {
 
   return (
     <Layout>
-      <div className="max-w-4xl mx-auto py-20 px-4">
+      <div className="w-full  mx-auto py-20 px-6">
         <div className="border-l-4 border-orange-500 pl-4 mb-8">
           <h1 className="text-4xl font-bold text-gray-900">Contact Us</h1>
         </div>
@@ -112,7 +112,7 @@ export function ContactPage() {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full border-2 border-gray-300 px-4 py-2 focus:border-orange-500 outline-none transition-colors"
+                  className="w-full border-2 border-gray-300 rounded px-4 py-2 focus:border-orange-500 outline-none transition-colors"
                   placeholder="Your name"
                   disabled={loading}
                 />
@@ -126,7 +126,7 @@ export function ContactPage() {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full border-2 border-gray-300 px-4 py-2 focus:border-orange-500 outline-none transition-colors"
+                  className="w-full border-2 border-gray-300 rounded px-4 py-2 focus:border-orange-500 outline-none transition-colors"
                   placeholder="your@email.com"
                   disabled={loading}
                 />
@@ -140,7 +140,7 @@ export function ContactPage() {
                   rows={5}
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full border-2 border-gray-300 px-4 py-2 focus:border-orange-500 outline-none transition-colors resize-none"
+                  className="w-full border-2 border-gray-300 rounded px-4 py-2 focus:border-orange-500 outline-none transition-colors resize-none"
                   placeholder="Your message..."
                   disabled={loading}
                 ></textarea>
@@ -148,7 +148,7 @@ export function ContactPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-orange-500 text-white py-3 px-6 font-bold uppercase tracking-wide hover:bg-orange-600 transition-colors flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-orange-500 rounded text-white py-3 px-6 font-bold uppercase tracking-wide hover:bg-orange-600 transition-colors flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span>{loading ? "Göndərilir..." : "Send Message"}</span>
                 {!loading && <ArrowRight size={18} />}

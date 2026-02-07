@@ -1,10 +1,9 @@
 import Layout from "../layout/Layout";
 
-// Reklam Səhifəsi Komponenti
 export function AdsPage() {
   return (
    <Layout>
-     <div className="max-w-4xl mx-auto py-20">
+     <div className="w-full px-6 mx-auto py-20">
       <div className="border-l-4 border-orange-500 pl-4 mb-8">
         <h1 className="text-4xl font-bold text-gray-900">Bizimlə Reklam Verin</h1>
       </div>
@@ -14,7 +13,7 @@ export function AdsPage() {
           The Wire reklam həlləri ilə milyonlarla aktiv oxucuya çatın. Platformamız məlumatlı və müxtəlif auditoriyaya bənzərsiz çıxış imkanı təqdim edir.
         </p>
 
-        <div className="bg-gradient-to-br from-black to-gray-900 text-white p-8">
+        <div className="bg-linear-to-br rounded-md from-black to-gray-900 text-white p-8">
           <h2 className="text-3xl font-bold mb-4">Niyə The Wire-da Reklam Verməlisiniz?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
             <div>

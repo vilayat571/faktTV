@@ -3,7 +3,7 @@ import Layout from "../layout/Layout";
 export function AboutPage() {
   return (
  <Layout>
-     <div className="max-w-4xl mx-auto py-20">
+     <div className="w-full px-6 mx-auto py-20">
       <div className="border-l-4 border-orange-500 pl-4 mb-8">
         <h1 className="text-4xl font-bold text-gray-900">About The Wire</h1>
       </div>
