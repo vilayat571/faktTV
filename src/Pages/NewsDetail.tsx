@@ -1,14 +1,27 @@
+import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
-import "quill/dist/quill.snow.css";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import type { News } from "../types";
 import Layout from "../layout/Layout";
-import { Type, ArrowLeft, Calendar, User, Bookmark, Link as LinkIcon, Check, BookmarkCheck, Eye, EyeOff } from "lucide-react";
+import {
+  Type,
+  ArrowLeft,
+  Calendar,
+  User,
+  Bookmark,
+  Link as LinkIcon,
+  Check,
+  BookmarkCheck,
+  Eye,
+  EyeOff,
+  Copy,
+} from "lucide-react";
 import NewsCard from "../components/NewsCard";
 import { API_ENDPOINT } from "../constants/urls";
 import { fetchNewsById } from "../api/api";
 import { useMetaTags } from "../hooks/useMetaTags";
+import "../assets/styles/newsDetail.css";
 
 const NewsDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -19,6 +32,7 @@ const NewsDetail = () => {
   const [loading, setLoading] = useState(true);
   const [fontSize, setFontSize] = useState(16);
   const [copied, setCopied] = useState(false);
+  const [textCopied, setTextCopied] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
   const [isRead, setIsRead] = useState(false);
 
@@ -27,7 +41,7 @@ const NewsDetail = () => {
     if (news) {
       const savedNews = JSON.parse(localStorage.getItem("savedNews") || "[]");
       setIsSaved(savedNews.some((item: News) => item._id === news._id));
-      
+
       const readNews = JSON.parse(localStorage.getItem("readNews") || "[]");
       setIsRead(readNews.some((item: News) => item._id === news._id));
     }
@@ -152,15 +166,15 @@ const NewsDetail = () => {
     });
 
   const increaseFontSize = () => {
-    setFontSize((prev) => Math.min(prev + 2, 24));
+    setFontSize((prev) => Math.min(prev + 2, 28));
   };
 
   const decreaseFontSize = () => {
-    setFontSize((prev) => Math.max(prev - 2, 12));
+    setFontSize((prev) => Math.max(prev - 2, 14));
   };
 
   const resetFontSize = () => {
-    setFontSize(16);
+    setFontSize(22);
   };
 
   const copyLinkToClipboard = async () => {
@@ -174,11 +188,25 @@ const NewsDetail = () => {
     }
   };
 
+  const copyTextToClipboard = async () => {
+    if (!news) return;
+
+    try {
+      const textContent = stripHtml(news.body);
+      const fullText = `${news.title}\n\nMüəllif: ${news.author}\nTarix: ${formatDate(news.date)}\n\n${textContent}`;
+      await navigator.clipboard.writeText(fullText);
+      setTextCopied(true);
+      setTimeout(() => setTextCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy text:", err);
+    }
+  };
+
   const toggleSaveNews = () => {
     if (!news) return;
 
     const savedNews = JSON.parse(localStorage.getItem("savedNews") || "[]");
-    
+
     if (isSaved) {
       // Remove from saved
       const filtered = savedNews.filter((item: News) => item._id !== news._id);
@@ -199,7 +227,7 @@ const NewsDetail = () => {
     if (!news) return;
 
     const readNews = JSON.parse(localStorage.getItem("readNews") || "[]");
-    
+
     if (isRead) {
       // Mark as unread
       const filtered = readNews.filter((item: News) => item._id !== news._id);
@@ -237,7 +265,9 @@ const NewsDetail = () => {
               <div className="w-16 h-16 border-4 border-orange-200 rounded-full"></div>
               <div className="w-16 h-16 border-4 border-orange-500 border-t-transparent rounded-full animate-spin absolute top-0"></div>
             </div>
-            <p className="text-gray-700 text-xl font-medium">Xəbər yüklənir...</p>
+            <p className="text-gray-700 text-xl font-medium">
+              Xəbər yüklənir...
+            </p>
           </div>
         </div>
       </Layout>
@@ -250,12 +280,12 @@ const NewsDetail = () => {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="w-full py-5 bg-gradient-to-b from-gray-50 to-white">
+        <div className="w-11/12 mx-auto  ">
           {/* Back Button */}
           <button
             onClick={() => navigate(-1)}
-            className="group mb-8 inline-flex items-center gap-3 bg-gradient-to-r from-gray-900 to-black text-white px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 animate-fadeIn"
+            className="group mb-8 inline-flex items-center gap-3 bg-gradient-to-r from-gray-900 to-black text-white px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 animate-fadeIn cursor-pointer"
           >
             <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
             <span className="font-semibold">Geri</span>
@@ -267,10 +297,14 @@ const NewsDetail = () => {
             <div className="relative bg-gradient-to-br from-orange-500 via-red-500 to-pink-600 text-white p-8 lg:p-12">
               {/* Decorative background pattern */}
               <div className="absolute inset-0 opacity-10">
-                <div className="absolute inset-0" style={{
-                  backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
-                  backgroundSize: '40px 40px'
-                }}></div>
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    backgroundImage:
+                      "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
+                    backgroundSize: "40px 40px",
+                  }}
+                ></div>
               </div>
 
               {/* Decorative blurs */}
@@ -312,21 +346,21 @@ const NewsDetail = () => {
                   <div className="flex gap-1">
                     <button
                       onClick={decreaseFontSize}
-                      className="px-3 py-1.5 bg-gray-100 rounded-lg hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-500 hover:text-white transition-all duration-300 text-sm font-semibold"
+                      className="px-3 py-1.5 bg-gray-100 rounded-lg hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-500 hover:text-white transition-all duration-300 text-sm font-semibold cursor-pointer"
                       title="Mətn ölçüsünü azalt"
                     >
                       A-
                     </button>
                     <button
                       onClick={resetFontSize}
-                      className="px-3 py-1.5 bg-gray-100 rounded-lg hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-500 hover:text-white transition-all duration-300 text-sm font-semibold"
+                      className="px-3 py-1.5 bg-gray-100 rounded-lg hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-500 hover:text-white transition-all duration-300 text-sm font-semibold cursor-pointer"
                       title="Normal mətn ölçüsü"
                     >
                       A
                     </button>
                     <button
                       onClick={increaseFontSize}
-                      className="px-3 py-1.5 bg-gray-100 rounded-lg hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-500 hover:text-white transition-all duration-300 text-sm font-semibold"
+                      className="px-3 py-1.5 bg-gray-100 rounded-lg hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-500 hover:text-white transition-all duration-300 text-sm font-semibold cursor-pointer"
                       title="Mətn ölçüsünü artır"
                     >
                       A+
@@ -336,9 +370,25 @@ const NewsDetail = () => {
 
                 {/* Action Buttons */}
                 <div className="flex items-center gap-2">
-                  <button 
+                  <button
+                    onClick={copyTextToClipboard}
+                    className="relative p-2.5 bg-white rounded-lg hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-500 hover:text-white transition-all duration-300 shadow-sm border border-gray-200 group cursor-pointer"
+                    title={textCopied ? "Mətn kopyalandı!" : "Mətni kopyala"}
+                  >
+                    {textCopied ? (
+                      <Check className="w-5 h-5 text-green-500 group-hover:text-white animate-scaleIn" />
+                    ) : (
+                      <Copy className="w-5 h-5 text-gray-600 group-hover:text-white" />
+                    )}
+                    {textCopied && (
+                      <span className="absolute -top-10 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-xs px-3 py-1.5 rounded-lg whitespace-nowrap animate-fadeIn">
+                        Mətn kopyalandı!
+                      </span>
+                    )}
+                  </button>
+                  <button
                     onClick={copyLinkToClipboard}
-                    className="relative p-2.5 bg-white rounded-lg hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-500 hover:text-white transition-all duration-300 shadow-sm border border-gray-200 group"
+                    className="relative p-2.5 bg-white rounded-lg hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-500 hover:text-white transition-all duration-300 shadow-sm border border-gray-200 group cursor-pointer"
                     title={copied ? "Link kopyalandı!" : "Linki kopyala"}
                   >
                     {copied ? (
@@ -352,10 +402,14 @@ const NewsDetail = () => {
                       </span>
                     )}
                   </button>
-                  <button 
+                  <button
                     onClick={toggleReadNews}
-                    className={`relative p-2.5 bg-white rounded-lg hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-500 transition-all duration-300 shadow-sm border border-gray-200 group ${isRead ? 'bg-gradient-to-r from-blue-500 to-blue-600' : ''}`}
-                    title={isRead ? "Oxunmuş olaraq işarələnib" : "Oxunmuş kimi işarələ"}
+                    className={`relative p-2.5 bg-white rounded-lg hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-500 transition-all duration-300 shadow-sm border border-gray-200 group cursor-pointer ${isRead ? "bg-gradient-to-r from-blue-500 to-blue-600" : ""}`}
+                    title={
+                      isRead
+                        ? "Oxunmuş olaraq işarələnib"
+                        : "Oxunmuş kimi işarələ"
+                    }
                   >
                     {isRead ? (
                       <Eye className="w-5 h-5 text-white animate-scaleIn" />
@@ -363,9 +417,9 @@ const NewsDetail = () => {
                       <EyeOff className="w-5 h-5 text-gray-600 group-hover:text-white" />
                     )}
                   </button>
-                  <button 
+                  <button
                     onClick={toggleSaveNews}
-                    className={`relative p-2.5 bg-white rounded-lg hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-500 transition-all duration-300 shadow-sm border border-gray-200 group ${isSaved ? 'bg-gradient-to-r from-orange-500 to-red-500' : ''}`}
+                    className={`relative p-2.5 bg-white rounded-lg hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-500 transition-all duration-300 shadow-sm border border-gray-200 group cursor-pointer ${isSaved ? "bg-gradient-to-r from-orange-500 to-red-500" : ""}`}
                     title={isSaved ? "Yadda saxlanılıb" : "Yadda saxla"}
                   >
                     {isSaved ? (
@@ -378,18 +432,19 @@ const NewsDetail = () => {
               </div>
             </div>
 
-            {/* Article Content */}
-            <div className="p-8 lg:p-12">
-              <div className="ql-container ql-snow" style={{ border: "none" }}>
-                <div
-                  className="ql-editor max-w-4xl mx-auto prose prose-lg"
-                  dangerouslySetInnerHTML={{ __html: news.body }}
-                  style={{
-                    padding: 0,
-                    minHeight: "auto",
-                    fontSize: `${fontSize}px`,
-                    lineHeight: 1.8,
-                  }}
+            {/* Article Content - READ-ONLY REACT QUILL */}
+            {/* Article Content - READ-ONLY REACT QUILL */}
+            <div className="py-5 px-6">
+              <div
+                style={{ fontSize: `${fontSize}px` }}
+                className="dynamic-font-wrapper"
+              >
+                <ReactQuill
+                  theme="snow"
+                  value={news.body}
+                  readOnly={true}
+                  modules={{ toolbar: false }}
+                  className="read-only-quill"
                 />
               </div>
             </div>
@@ -430,65 +485,16 @@ const NewsDetail = () => {
         </div>
       </div>
 
-      <style>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
-        }
-
-        @keyframes slideInUp {
-          from {
-            opacity: 0;
-            transform: translateY(50px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes scaleIn {
-          from {
-            opacity: 0;
-            transform: scale(0.5);
-          }
-          to {
-            opacity: 1;
-            transform: scale(1);
-          }
-        }
-
-        .animate-fadeInUp {
-          animation: fadeInUp 0.6s ease-out;
-        }
-
-        .animate-fadeIn {
-          animation: fadeIn 0.8s ease-out;
-        }
-
-        .animate-slideInUp {
-          animation: slideInUp 0.7s ease-out;
-        }
-
-        .animate-scaleIn {
-          animation: scaleIn 0.3s ease-out;
-        }
-      `}</style>
+      <style>
+        {`
+          .read-only-quill .ql-container {
+  border: none !important;
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: ${fontSize}px;
+  padding:0px;
+}
+  `}
+      </style>
     </Layout>
   );
 };

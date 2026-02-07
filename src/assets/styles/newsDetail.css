@@ -1,0 +1,171 @@
+/* READ-ONLY QUILL STYLES */
+
+
+.read-only-quill .ql-editor {
+  padding: 0 !important;
+  color: #1f2937;
+}
+
+/* Hide toolbar completely */
+.read-only-quill .ql-toolbar {
+  display: none !important;
+}
+
+/* Prevent cursor and selection */
+.read-only-quill .ql-editor {
+  cursor: default;
+}
+
+
+/* Style the content */
+
+
+.read-only-quill .ql-editor strong {
+  font-weight: 700;
+  color: #111827;
+}
+
+.read-only-quill .ql-editor em {
+  font-style: italic;
+}
+
+.read-only-quill .ql-editor u {
+  text-decoration: underline;
+}
+
+.read-only-quill .ql-editor s {
+  text-decoration: line-through;
+}
+
+.dynamic-font-wrapper .read-only-quill .ql-editor {
+  font-size: inherit !important;
+}
+
+.dynamic-font-wrapper .read-only-quill .ql-editor * {
+  font-size: inherit !important;
+}
+
+.read-only-quill .ql-editor h1,
+.read-only-quill .ql-editor h2,
+.read-only-quill .ql-editor h3,
+.read-only-quill .ql-editor h4,
+.read-only-quill .ql-editor h5,
+.read-only-quill .ql-editor h6 {
+  font-weight: 700;
+  margin-top: 1.5em;
+  margin-bottom: 0.75em;
+  color: #111827;
+}
+
+.read-only-quill .ql-editor h1 {
+  font-size: 2em;
+}
+.read-only-quill .ql-editor h2 {
+  font-size: 1.5em;
+}
+.read-only-quill .ql-editor h3 {
+  font-size: 1.25em;
+}
+
+.read-only-quill .ql-editor ul,
+.read-only-quill .ql-editor ol {
+  padding-left: 1.5em;
+  margin-bottom: 1.25em;
+}
+
+.read-only-quill .ql-editor li {
+  margin-bottom: 0.5em;
+}
+
+.read-only-quill .ql-editor blockquote {
+  border-left: 4px solid #f97316;
+  padding-left: 1em;
+  margin: 1.5em 0;
+  font-style: italic;
+  color: #4b5563;
+}
+
+.read-only-quill .ql-editor a {
+  color: #f97316;
+  text-decoration: underline;
+}
+
+.read-only-quill .ql-editor a:hover {
+  color: #ea580c;
+}
+
+.read-only-quill .ql-editor code {
+  background-color: #f3f4f6;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-family: "Courier New", monospace;
+  font-size: 0.9em;
+}
+
+.read-only-quill .ql-editor pre {
+  background-color: #1f2937;
+  color: #f9fafb;
+  padding: 1em;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 1.5em 0;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.8s ease-out;
+}
+
+.animate-slideInUp {
+  animation: slideInUp 0.7s ease-out;
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.3s ease-out;
+}
