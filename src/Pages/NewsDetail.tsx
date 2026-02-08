@@ -71,7 +71,7 @@ const NewsDetail = () => {
       .slice(0, 5)
       .join(", ");
 
-    return `${category}, ${titleWords}, Fact News, Azərbaycan xəbərləri, son xəbərlər`;
+    return `${category}, ${titleWords}, FAKT TV, Azərbaycan xəbərləri, son xəbərlər`;
   };
 
   // Dynamic meta tags with dynamic OG image generation
@@ -81,7 +81,7 @@ const NewsDetail = () => {
       news?.description ||
       (news?.body
         ? generateDescription(news.body)
-        : "Fact News - Azərbaycan və dünya xəbərləri"),
+        : "FAKT TV - Azərbaycan və dünya xəbərləri"),
     image: news?.image,
     url: `https://www.fact-news.info/news/${id}`,
     author: news?.author,

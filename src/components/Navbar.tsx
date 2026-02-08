@@ -231,7 +231,7 @@ const Navbar = () => {
                 <p className="text-3xl md:text-4xl flex items-center tracking-widest gap-1 relative">
                   {/* "fact" part */}
                   <span className="font-black tracking-wide bg-linear-to-br from-white via-gray-100 to-gray-300 bg-clip-text text-transparent drop-shadow-lg">
-                    fact
+                    fakt
                   </span>
 
                   {/* Separator */}
@@ -239,7 +239,7 @@ const Navbar = () => {
 
                   {/* "news" part */}
                   <span className="font-black tracking-wide bg-linear-to-br from-orange-500 via-orange-400 to-red-500 bg-clip-text text-transparent drop-shadow-lg animate-gradient flex items-center">
-                    news
+                    tv
                   </span>
 
                   {/* Sparkle effect */}

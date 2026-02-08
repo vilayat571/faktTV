@@ -27,7 +27,7 @@ const Privacy = () => {
                 <h1 className="text-3xl lg:text-5xl font-bold">Məxfilik Siyasəti</h1>
               </div>
               <p className="text-lg text-white/90 max-w-3xl">
-                Fact News olaraq, istifadəçilərimizin məxfiliyinə hörmət edirik və şəxsi məlumatlarınızın təhlükəsizliyini təmin edirik.
+                FAKT TV olaraq, istifadəçilərimizin məxfiliyinə hörmət edirik və şəxsi məlumatlarınızın təhlükəsizliyini təmin edirik.
               </p>
               <p className="text-sm text-white/70 mt-4">
                 Son yenilənmə: 6 Fevral, 2026
