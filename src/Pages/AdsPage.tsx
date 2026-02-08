@@ -5,7 +5,7 @@ export function AdsPage() {
   return (
    <Layout>
      <div className="w-full bg-linear-to-b from-gray-50 to-white">
-       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+       <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 py-12">
         
         {/* Header Section */}
         <div className="relative bg-linear-to-br from-orange-500 via-red-500 to-pink-600 text-white rounded-2xl p-8 lg:p-12 mb-12 shadow-xl overflow-hidden">
