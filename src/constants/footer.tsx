@@ -1,20 +1,16 @@
-import { Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
+import {  Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
 
 export const socialMedia = [
-  {
-    name: "Facebook",
-    icon: <Facebook className="w-5 h-5" />,
-    url: "#",
-  },
+
   {
     name: "Twitter",
     icon: <Twitter className="w-5 h-5" />,
-    url: "#",
+    url: "https://www.tiktok.com/@fakttvmedia?_r=1&_t=ZS-93k6kUvqkyW",
   },
   {
     name: "Instagram",
     icon: <Instagram className="w-5 h-5" />,
-    url: "#",
+    url: "https://www.instagram.com/fakt.tv?igsh=MXN0aDMza3E1NWxrMA==",
   },
   {
     name: "LinkedIn",
@@ -24,6 +20,6 @@ export const socialMedia = [
   {
     name: "YouTube",
     icon: <Youtube className="w-5 h-5" />,
-    url: "#",
+    url: "https://www.youtube.com/@fakttvdunya",
   },
 ];

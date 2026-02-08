@@ -1,17 +1,12 @@
 import { Link } from "react-router-dom";
 import { CATEGORIES, quickLinks } from "../types";
-import { socialMedia } from "../constants/footer";
+import '../assets/styles/footer.css'
 import { useState } from "react";
 import { API_ENDPOINT } from "../constants/urls";
-import {
-  ArrowRight,
-  CheckCircle,
-  AlertCircle,
-  Sparkles,
-} from "lucide-react";
+import { ArrowRight, CheckCircle, AlertCircle, Sparkles } from "lucide-react";
+import BottomFooter from "../atoms/BottomFooter";
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -84,7 +79,7 @@ const Footer = () => {
                   <p className="text-3xl md:text-4xl flex items-center tracking-widest gap-1 relative">
                     {/* "fact" part */}
                     <span className="font-black tracking-wide bg-linear-to-br from-white via-gray-100 to-gray-300 bg-clip-text text-transparent drop-shadow-lg">
-                      fact
+                      fakt
                     </span>
 
                     {/* Separator */}
@@ -92,7 +87,7 @@ const Footer = () => {
 
                     {/* "news" part */}
                     <span className="font-black tracking-wide bg-linear-to-br from-orange-500 via-orange-400 to-red-500 bg-clip-text text-transparent drop-shadow-lg animate-gradient flex items-center">
-                      news
+                      tv
                     </span>
 
                     {/* Sparkle effect */}
@@ -107,9 +102,9 @@ const Footer = () => {
               </Link>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Your trusted source for breaking news, in-depth analysis, and
-              compelling stories from around the world. Stay informed with THE
-              WIRE.
+              Dünyanın hər yerindən son xəbərlər, dərin təhlillər və maraqlı
+              məqalələr ilə etibarlı informasiya mənbəyiniz. Fakt TV ilə
+              məlumatlı olun.
             </p>
             <div className="flex items-center gap-2 text-sm">
               <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
@@ -127,7 +122,7 @@ const Footer = () => {
               {CATEGORIES.map((category) => (
                 <li key={category.value}>
                   <Link
-                    to={category.value}
+                    to={`/category/${category.value}`}
                     className="group flex items-center gap-2 text-gray-400 hover:text-orange-500 transition-all duration-300"
                   >
                     <span className="w-1 h-1 bg-gray-600 rounded-full group-hover:bg-orange-500 group-hover:w-2 transition-all duration-300"></span>
@@ -143,7 +138,7 @@ const Footer = () => {
           {/* Quick Links */}
           <div>
             <h4 className="text-lg font-bold mb-6 relative inline-block">
-              <span className="relative z-10">Sürətli Keçidlər</span>
+              <span className="relative z-10">Digər səhifələr</span>
               <div className="absolute bottom-0 left-0 w-full h-2 bg-linear-to-r from-orange-500/30 to-transparent"></div>
             </h4>
             <ul className="space-y-3">
@@ -186,7 +181,8 @@ const Footer = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="group w-full bg-linear-to-r from-orange-500 via-red-500 to-pink-600 text-white px-6 py-3 rounded-xl hover:shadow-lg hover:shadow-orange-500/30 transition-all duration-300 text-sm font-bold uppercase tracking-wide disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="group cursor-pointer
+                 w-full bg-linear-to-r from-orange-500 via-red-500 to-pink-600 text-white px-6 py-3 rounded-xl hover:shadow-lg hover:shadow-orange-500/30 transition-all duration-300 text-sm font-bold uppercase tracking-wide disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {loading ? (
                   <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -241,38 +237,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Bottom Footer */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-          {/* Copyright */}
-          <p className="text-gray-400 text-sm">
-            © {currentYear}{" "}
-            <span className="text-orange-500 font-semibold">THE WIRE</span>.
-            Bütün hüquqlar qorunur.
-          </p>
-
-          {/* Social Media */}
-          <div className="flex items-center gap-4">
-            <span className="text-gray-400 text-sm hidden sm:block">
-              Bizi izləyin:
-            </span>
-            <div className="flex gap-3">
-              {socialMedia.map((social) => (
-                <a
-                  key={social.name}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group relative p-3 bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700 hover:border-orange-500 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-orange-500/20"
-                  aria-label={social.name}
-                >
-                  <div className="text-gray-400 group-hover:text-orange-500 transition-colors duration-300">
-                    {social.icon}
-                  </div>
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
+        <BottomFooter />
 
         {/* Extra Info */}
         <div className="mt-12 text-center">
