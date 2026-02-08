@@ -1,0 +1,74 @@
+# Fakt TV - Robots.txt
+# https://www.fact-news.info/robots.txt
+
+# User-agent: * - Bütün botlar üçün qaydalar
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*.json$
+Disallow: /*?*utm_source=
+Disallow: /*?*utm_medium=
+Disallow: /*?*utm_campaign=
+
+# Saved və Read səhifələri şəxsi olduğu üçün indexləmə yoxdur
+Disallow: /saved
+Disallow: /read
+
+# Googlebot üçün xüsusi qaydalar
+User-agent: Googlebot
+Allow: /
+Disallow: /saved
+Disallow: /read
+Crawl-delay: 1
+
+# Googlebot Images
+User-agent: Googlebot-Image
+Allow: /
+
+# Bing bot
+User-agent: Bingbot
+Allow: /
+Disallow: /saved
+Disallow: /read
+Crawl-delay: 1
+
+# Yandex
+User-agent: Yandex
+Allow: /
+Disallow: /saved
+Disallow: /read
+Crawl-delay: 2
+
+# Facebook crawler
+User-agent: facebookexternalhit
+Allow: /
+
+# Twitter crawler
+User-agent: Twitterbot
+Allow: /
+
+# Telegram crawler
+User-agent: TelegramBot
+Allow: /
+
+# Zərərli botları blokla
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+# Sitemap - Backend URL
+Sitemap: https://agsanews-production.up.railway.app/sitemap.xml
+
+# Host - Frontend URL
+Host: https://www.fact-news.info
+```

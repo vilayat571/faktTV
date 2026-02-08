@@ -1,7 +1,7 @@
 // components/NewsCard.tsx
 import { Link } from "react-router-dom";
 import { User, Calendar, MoveUpRight } from "lucide-react";
-import type { News } from "../types";
+import { CATEGORIES, type News } from "../types";
 import { formatDate } from "../constants/formatDate";
 
 interface NewsCardProps {
@@ -22,9 +22,9 @@ const NewsCard = ({ news }: NewsCardProps) => {
         <div className="p-5 pb-3">
           <span
             className="inline-block bg-linear-to-r from-gray-900 to-gray-800 text-white px-3 py-1 text-xs font-bold 
-          uppercase rounded-md shadow-sm group-hover:shadow-md group-hover:from-orange-500 group-hover:to-orange-600 transition-all duration-300"
+          tracking-wider rounded-md shadow-sm group-hover:shadow-md group-hover:from-orange-500 group-hover:to-orange-600 transition-all duration-300"
           >
-            {news.category}
+            {CATEGORIES.find((item)=>item.value==news.category)?.name}
           </span>
         </div>
 

@@ -60,13 +60,13 @@ const Navbar = () => {
     const updateCounts = () => {
       const saved = JSON.parse(localStorage.getItem("savedNews") || "[]");
       setSavedCount(saved.length);
-      
+
       const read = JSON.parse(localStorage.getItem("readNews") || "[]");
       setReadCount(read.length);
     };
 
     updateCounts();
-    
+
     // Listen for storage changes
     window.addEventListener("storage", updateCounts);
     // Custom events for same-tab updates
@@ -216,7 +216,7 @@ const Navbar = () => {
         {/* Animated top border */}
         <div className="h-0.5 bg-linear-to-r from-transparent via-orange-500 to-transparent animate-pulse"></div>
 
-        <div className="w-9/10  mx-auto px-4 py-4">
+        <div className="xl:w-9/10 lg:w-9/10 md:w-9/10 sm:w-full  mx-auto xl:px-4 lg:px-4  md:px-4  sm:px-1 py-4">
           <div className="flex items-center justify-between">
             {/* Enhanced Logo */}
             <Link
@@ -616,7 +616,7 @@ const Navbar = () => {
 
       {/* Enhanced Search Modal */}
       {showSearchModal && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center px-4 sm:px-6 pt-16 sm:pt-20 animate-fadeIn">
+        <div className="fixed inset-0 z-50 flex items-start justify-center px-4 sm:px-3 pt-16 sm:pt-20 animate-fadeIn">
           {/* Enhanced Background with better opacity */}
           <div className="absolute inset-0 bg-black opacity-60"></div>
 
@@ -626,7 +626,7 @@ const Navbar = () => {
             className="
               bg-white
               relative z-10 rounded-2xl shadow-2xl
-              w-full sm:w-[90%] md:w-[70%] lg:w-[50%] xl:w-[45%]
+              w-full sm:w-full md:w-[70%] lg:w-[50%] xl:w-[45%]
               max-h-[85vh] sm:max-h-[80vh]
               overflow-hidden flex flex-col
               border border-orange-200
@@ -717,7 +717,7 @@ const Navbar = () => {
                               transition-shadow duration-300
                             "
                             >
-                              {result.category}
+                              {CATEGORIES.find((item)=>item.value==result.category)?.name}
                             </span>
                           </div>
                           <h4 className="text-sm font-bold text-gray-900 line-clamp-2 mb-2 group-hover:text-orange-600 transition-colors">

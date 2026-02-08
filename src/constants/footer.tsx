@@ -15,7 +15,7 @@ export const socialMedia = [
   {
     name: "LinkedIn",
     icon: <Linkedin className="w-5 h-5" />,
-    url: "#",
+    url: "https://www.linkedin.com/company/faktv",
   },
   {
     name: "YouTube",

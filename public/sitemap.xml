@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Ana Səhifə -->
+  <url>
+    <loc>https://www.fact-news.info/</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Haqqımızda -->
+  <url>
+    <loc>https://www.fact-news.info/about</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Əlaqə -->
+  <url>
+    <loc>https://www.fact-news.info/contact</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Reklam -->
+  <url>
+    <loc>https://www.fact-news.info/ads</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Məxfilik Siyasəti -->
+  <url>
+    <loc>https://www.fact-news.info/privacy</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Saxlanılan Xəbərlər -->
+  <url>
+    <loc>https://www.fact-news.info/saved</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <!-- Oxunmuş Xəbərlər -->
+  <url>
+    <loc>https://www.fact-news.info/read</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <!-- Kateqoriyalar -->
+  <url>
+    <loc>https://www.fact-news.info/category/siyaset</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.fact-news.info/category/iqtisadiyyat</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.fact-news.info/category/cemiyyet</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.fact-news.info/category/texnologiya</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.fact-news.info/category/meqaleler</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.fact-news.info/category/dunya</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+
+  <!-- 
+    Qeyd: Xəbər səhifələri dinamikdir və API-dən gəlir.
+    /news/:id URL-ləri dinamik olaraq backend tərəfindən
+    və ya ayrıca sitemap generator ilə əlavə edilməlidir.
+  -->
+
+</urlset>

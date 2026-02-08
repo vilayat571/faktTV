@@ -5,7 +5,7 @@ import NewsCard from "../components/NewsCard";
 import { API_ENDPOINT } from "../constants/urls";
 import { TrendingUp, } from "lucide-react";
 import Layout from "../layout/Layout";
-import LoadingSkeleton from "../components/HomePage/LoadingSkeleton";
+import LoadingSkeleton from "../components/LoadingSkeleton";
 import MainNews from "./MainNews";
 
 const HomePage = () => {

@@ -4,7 +4,7 @@ import Layout from "../layout/Layout";
 import NewsCard from "../components/NewsCard";
 import { CATEGORIES, type News } from "../types";
 import { API_ENDPOINT } from "../constants/urls";
-import { Newspaper, TrendingUp } from "lucide-react";
+import { Newspaper, TrendingUp, Frown, CheckCircle } from "lucide-react";
 
 const CategoryPage = () => {
   const { category } = useParams<{ category: string }>();
@@ -95,8 +95,8 @@ const CategoryPage = () => {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-        <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+      <div className="min-h-screen bg-linear-to-b from-gray-50 to-white">
+        <div className="w-full mx-auto px-4 sm:px-2 lg:px-8 py-8 lg:py-12">
           {/* Category Header with modern styling */}
           <div className="mb-12 animate-slideInDown">
             {/* Breadcrumb */}
@@ -111,7 +111,7 @@ const CategoryPage = () => {
             </div>
 
             {/* Category Title Card */}
-            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-orange-500 via-red-500 to-pink-600 p-8 shadow-2xl">
+            <div className="relative overflow-hidden rounded-2xl bg-linear-to-br from-orange-500 via-red-500 to-pink-600 p-8 shadow-2xl">
               {/* Decorative background pattern */}
               <div className="absolute inset-0 opacity-10">
                 <div className="absolute inset-0" style={{
@@ -123,14 +123,14 @@ const CategoryPage = () => {
               {/* Content */}
               <div className="relative z-10">
                 <div className="flex items-center gap-4 mb-4">
-                  <div className="p-4 bg-white/20 backdrop-blur-sm rounded-xl text-white shadow-lg">
+                  <div className="xl:p-4 lg:p-4 md:p-4 sm:p-2 bg-white/20 backdrop-blur-sm rounded-xl text-white shadow-lg">
                     {getCategoryIcon()}
                   </div>
                   <div>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-2 drop-shadow-lg">
+                    <h1 className="xl:text-4xl lg:text-4xl md:text-4xl sm:text-3xl font-bold text-white mb-2 drop-shadow-lg">
                       {categoryName?.name}
                     </h1>
-                    <p className="text-white/90 text-lg flex items-center gap-2">
+                    <p className="text-white/90 xl:flex lg:flex md:flex sm:hidden text-lg items-center gap-2">
                       <TrendingUp className="w-5 h-5" />
                       <span>Kateqoriyasından ən son xəbərlər</span>
                     </p>
@@ -143,10 +143,10 @@ const CategoryPage = () => {
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
                       <span className="text-sm font-medium">
-                      Son  {news.length} xəbər
+                        Son {news.length} xəbər
                       </span>
                     </div>
-                    <div className="h-4 w-px bg-white/30"></div>
+                    <div className="h-4 w-px xl:inline lg:inline md:hidden sm:hidden bg-white/30"></div>
                     <div className="text-sm">Canlı yenilənir</div>
                   </div>
                 )}
@@ -195,20 +195,8 @@ const CategoryPage = () => {
                 </div>
               ) : (
                 <div className="text-center py-20 animate-fadeIn">
-                  <div className="inline-flex items-center justify-center w-24 h-24 mb-6 rounded-full bg-gradient-to-br from-gray-100 to-gray-200">
-                    <svg
-                      className="w-12 h-12 text-gray-400"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
+                  <div className="inline-flex items-center justify-center w-24 h-24 mb-6 rounded-full bg-linear-to-br from-gray-100 to-gray-200">
+                    <Frown className="w-12 h-12 text-gray-400" />
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">
                     Xəbər tapılmadı
@@ -237,21 +225,9 @@ const CategoryPage = () => {
           {/* End of Results */}
           {!hasMore && news.length > 0 && !initialLoading && (
             <div className="flex justify-center mt-12 animate-fadeIn">
-              <div className="text-center py-8 px-6 bg-gradient-to-r from-gray-50 to-white rounded-xl border border-gray-100 shadow-sm">
-                <div className="inline-flex items-center justify-center w-12 h-12 mb-3 rounded-full bg-gradient-to-br from-orange-100 to-orange-50">
-                  <svg
-                    className="w-6 h-6 text-orange-500"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
+              <div className="text-center py-8 px-6 bg-linear-to-r from-gray-50 to-white rounded-xl border border-gray-100 shadow-sm">
+                <div className="inline-flex items-center justify-center w-12 h-12 mb-3 rounded-full bg-linear-to-br from-orange-100 to-orange-50">
+                  <CheckCircle className="w-6 h-6 text-orange-500" />
                 </div>
                 <p className="text-gray-700 font-medium">
                   Bütün xəbərlər göstərildi
