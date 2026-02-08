@@ -1,61 +1,33 @@
-// src/hooks/useMetaTags.ts
+// hooks/useMetaTags.ts
 import { useEffect } from 'react';
 
 interface MetaTagsProps {
   title: string;
   description: string;
   image?: string;
-  url?: string;
+  url: string;
   author?: string;
   publishedTime?: string;
   category?: string;
   keywords?: string;
-  generateDynamicImage?: boolean; // New prop
+  generateDynamicImage?: boolean;
 }
 
 export const useMetaTags = ({
   title,
   description,
   image,
-  url = 'https://www.fact-news.info/',
+  url,
   author,
   publishedTime,
   category,
-  keywords,
-  generateDynamicImage = false,
-}: MetaTagsProps) => {
+  keywords}: MetaTagsProps) => {
   useEffect(() => {
-    // Update document title
-    document.title = `${title} | FAKT TV`;
+    // Update title
+    document.title = `${title} | Fakt TV`;
 
-    // Generate dynamic OG image URL if no image provided and dynamic generation is enabled
-    let ogImage = image;
-    
-    if (!ogImage && generateDynamicImage) {
-      // Format the date nicely
-      const formattedDate = publishedTime 
-        ? new Date(publishedTime).toLocaleDateString('az-AZ', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric',
-          })
-        : '';
-
-      // Build the dynamic OG image URL
-      const params = new URLSearchParams({
-        title: title.substring(0, 120), // Limit length for URL
-        ...(category && { category }),
-        ...(formattedDate && { date: formattedDate }),
-      });
-      
-      ogImage = `https://www.fact-news.info/api/og-image?${params.toString()}`;
-    } else if (!ogImage) {
-      // Fallback to default image
-      ogImage = 'https://www.fact-news.info/og-image.jpg';
-    }
-
-    // Helper function to set or update meta tags
-    const setMetaTag = (property: string, content: string, isProperty = true) => {
+    // Helper function to update or create meta tag
+    const updateMetaTag = (property: string, content: string, isProperty = true) => {
       const attribute = isProperty ? 'property' : 'name';
       let element = document.querySelector(`meta[${attribute}="${property}"]`);
       
@@ -68,68 +40,90 @@ export const useMetaTags = ({
       element.setAttribute('content', content);
     };
 
-    // Basic meta tags
-    setMetaTag('description', description, false);
-    if (keywords) {
-      setMetaTag('keywords', keywords, false);
-    }
-    if (author) {
-      setMetaTag('author', author, false);
-    }
+    // Primary meta tags
+    updateMetaTag('description', description, false);
+    if (keywords) updateMetaTag('keywords', keywords, false);
+    if (author) updateMetaTag('author', author, false);
 
     // Open Graph tags
-    setMetaTag('og:title', title);
-    setMetaTag('og:description', description);
-    setMetaTag('og:image', ogImage);
-    setMetaTag('og:image:secure_url', ogImage); // Important for WhatsApp
-    setMetaTag('og:image:type', 'image/png'); // Dynamic images are PNG
-    setMetaTag('og:url', url);
-    setMetaTag('og:type', 'article');
-    setMetaTag('og:site_name', 'FAKT TV');
-    setMetaTag('og:locale', 'az_AZ');
+    updateMetaTag('og:type', 'article');
+    updateMetaTag('og:url', url);
+    updateMetaTag('og:title', title);
+    updateMetaTag('og:description', description);
+    updateMetaTag('og:site_name', 'Fakt TV');
+    updateMetaTag('og:locale', 'az_AZ');
 
-    // Open Graph Image dimensions
-    setMetaTag('og:image:width', '1200');
-    setMetaTag('og:image:height', '630');
-    setMetaTag('og:image:alt', title);
+    if (image) {
+      updateMetaTag('og:image', image);
+      updateMetaTag('og:image:secure_url', image);
+      updateMetaTag('og:image:alt', title);
+    }
 
-    // Article specific tags
     if (publishedTime) {
-      setMetaTag('article:published_time', publishedTime);
+      updateMetaTag('article:published_time', publishedTime);
     }
+
     if (author) {
-      setMetaTag('article:author', author);
+      updateMetaTag('article:author', author);
     }
+
     if (category) {
-      setMetaTag('article:section', category);
+      updateMetaTag('article:section', category);
     }
 
     // Twitter Card tags
-    setMetaTag('twitter:card', 'summary_large_image', false);
-    setMetaTag('twitter:title', title, false);
-    setMetaTag('twitter:description', description, false);
-    setMetaTag('twitter:image', ogImage, false);
-    setMetaTag('twitter:image:alt', title, false);
+    updateMetaTag('twitter:card', 'summary_large_image', false);
+    updateMetaTag('twitter:url', url, false);
+    updateMetaTag('twitter:title', title, false);
+    updateMetaTag('twitter:description', description, false);
+    
+    if (image) {
+      updateMetaTag('twitter:image', image, false);
+      updateMetaTag('twitter:image:alt', title, false);
+    }
 
     // Canonical URL
-    let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+    let canonical = document.querySelector('link[rel="canonical"]');
     if (!canonical) {
       canonical = document.createElement('link');
-      canonical.rel = 'canonical';
+      canonical.setAttribute('rel', 'canonical');
       document.head.appendChild(canonical);
     }
-    canonical.href = url;
+    canonical.setAttribute('href', url);
 
-    // Cleanup function to reset to default on unmount
-    return () => {
-      document.title = 'FAKT TV | Azərbaycan və Dünya Xəbərləri';
-      setMetaTag('og:title', 'FAKT TV | Azərbaycan və Dünya Xəbərləri');
-      setMetaTag('og:description', 'Azərbaycan və dünya üzrə ən son xəbərlər');
-      setMetaTag('og:image', 'https://www.fact-news.info/og-image.jpg');
-      setMetaTag('og:image:secure_url', 'https://www.fact-news.info/og-image.jpg');
-      setMetaTag('og:image:type', 'image/jpeg');
-      setMetaTag('og:url', 'https://www.fact-news.info/');
-      canonical.href = 'https://www.fact-news.info/';
+    // Structured Data (JSON-LD)
+    const structuredData = {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": title,
+      "description": description,
+      "image": image || 'https://www.fact-news.info/og-image.jpg',
+      "datePublished": publishedTime || new Date().toISOString(),
+      "author": {
+        "@type": "Person",
+        "name": author || "Fakt TV"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Fakt TV",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.fact-news.info/logo.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": url
+      }
     };
-  }, [title, description, image, url, author, publishedTime, category, keywords, generateDynamicImage]);
+
+    let script = document.querySelector('script[type="application/ld+json"]');
+    if (!script) {
+      script = document.createElement('script');
+      script.setAttribute('type', 'application/ld+json');
+      document.head.appendChild(script);
+    }
+    script.textContent = JSON.stringify(structuredData);
+
+  }, [title, description, image, url, author, publishedTime, category, keywords]);
 };
