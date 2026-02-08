@@ -1,50 +1,153 @@
+import { Shield, Target, Users, CheckCircle } from "lucide-react";
 import Layout from "../layout/Layout";
 
 export function AboutPage() {
   return (
- <Layout>
-     <div className="w-full px-6 mx-auto py-20">
-      <div className="border-l-4 border-orange-500 pl-4 mb-8">
-        <h1 className="text-4xl font-bold text-gray-900">About The Wire</h1>
-      </div>
+    <Layout>
+      <div className="w-full bg-linear-to-b from-gray-50 to-white">
+        <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          
+          {/* Header Section */}
+          <div className="relative bg-linear-to-br from-orange-500 via-red-500 to-pink-600 text-white rounded-2xl p-8 lg:p-12 mb-12 shadow-xl overflow-hidden">
+            <div className="absolute inset-0 opacity-10">
+              <div className="absolute inset-0" style={{
+                backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
+                backgroundSize: '40px 40px'
+              }}></div>
+            </div>
 
-      <div className="prose prose-lg max-w-none space-y-6">
-        <p className="text-xl text-gray-700 leading-relaxed">
-          The Wire is a modern news platform dedicated to delivering accurate, timely, and comprehensive coverage of the stories that matter most.
-        </p>
+            <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-white/10 rounded-full blur-3xl"></div>
+            <div className="absolute -top-6 -left-6 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
 
-        <div className="bg-gray-50 border-l-4 border-orange-500 p-6 my-8">
-          <h2 className="text-2xl font-bold mb-4 text-gray-900">Our Mission</h2>
-          <p className="text-gray-700">
-            We believe in the power of quality journalism to inform, educate, and empower our readers. Our mission is to provide unbiased, well-researched news coverage across multiple categories including sports, politics, technology, and business.
-          </p>
+            <div className="relative z-10">
+              <div className="flex items-center gap-3 mb-4">
+                <Shield className="w-10 h-10" />
+                <h1 className="text-3xl lg:text-5xl font-bold">Haqqımızda</h1>
+              </div>
+              <p className="text-lg text-white/90 max-w-3xl">
+                Fakt TV - doğru, faydalı və obyektiv xəbərlərin çatdırılması məqsədilə qurulmuş bir platformadır.
+              </p>
+            </div>
+          </div>
+
+          <div className="space-y-8">
+            
+            {/* Introduction */}
+            <div className="bg-white rounded-2xl shadow-xl p-8 lg:p-10">
+              <p className="text-xl text-gray-700 leading-relaxed mb-6">
+                Yerli və qlobal medianın diqqətdən kənarda qoyduğu və ya qərəzli yanaşdığı hadisələrə ədalətli və əcdadlarımızın dəyərləri prizmasından baxaraq, onları izləyicilərimizə xəbər formatında təqdim edirik.
+              </p>
+              <p className="text-gray-700 leading-relaxed">
+                Müasir dövrdə vaxtın azlığı, işlərin çoxluğu və durmadan dəyişən hadisələrin fonunda izləyicilərimizin vaxtını qənaətlə istifadə etməsini önə çəkirik. Bu məqsədlə, ən vacib, faydalı və əhəmiyyətli xəbərləri seçərək onları qısa müddətdə sizə çatdırırıq.
+              </p>
+            </div>
+
+            {/* Our Story */}
+            <div className="bg-gradient-to-r from-orange-50 to-red-50 border-l-4 border-orange-500 rounded-r-2xl p-8 lg:p-10">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="bg-orange-100 p-2 rounded-lg">
+                  <Users className="w-6 h-6 text-orange-600" />
+                </div>
+                <h2 className="text-2xl font-bold text-gray-900">Bizim Hekayəmiz</h2>
+              </div>
+              <p className="text-gray-700 leading-relaxed">
+                Biz uzun müddət Teleqram platformasında operativ xəbərçiliklə məşğul olmuş bir komandayıq. Lakin informasiya axınının sürətlə ötüb keçdiyi dövrdə yalnız xəbəri çatdırmağın kifayət etmədiyini gördük. Oxucuya sadəcə nə baş verdiyini deyil, niyə və necə baş verdiyini izah edən bir platformaya ehtiyac var idi. Məhz bu ehtiyacdan yola çıxaraq saytımızı — dərin təhlil və fakt əsaslı araşdırmalar məkanını yaratdıq.
+              </p>
+            </div>
+
+            {/* Mission */}
+            <div className="bg-white rounded-2xl shadow-xl p-8 lg:p-10">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="bg-orange-100 p-2 rounded-lg">
+                  <Target className="w-6 h-6 text-orange-600" />
+                </div>
+                <h2 className="text-2xl font-bold text-gray-900">Məqsədimiz</h2>
+              </div>
+              <p className="text-gray-700 leading-relaxed mb-4">
+                Azərbaycan mediasında çox vaxt kölgədə qalan, səthi işıqlandırılan və ya ümumiyyətlə diqqətdən kənarda qalan mövzuları gündəmə gətirmək. Biz kütləvi xəbər istehsalı ilə deyil, yalnız ən vacib hadisələr və onların mahiyyəti ilə çıxış edirik.
+              </p>
+              <p className="text-gray-700 leading-relaxed font-semibold">
+                Məqsədimiz oxucunu məlumatla yükləmək yox, məlumatı anlamağa kömək etməkdir.
+              </p>
+            </div>
+
+            {/* What Makes Us Different */}
+            <div className="bg-white rounded-2xl shadow-xl p-8 lg:p-10">
+              <h2 className="text-2xl font-bold mb-8 text-gray-900">Nə ilə Fərqlənirik</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <div className="border-2 border-gray-200 rounded-xl p-6 hover:border-orange-500 hover:shadow-lg transition-all cursor-pointer">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="bg-orange-100 p-2 rounded-lg">
+                      <CheckCircle className="w-5 h-5 text-orange-600" />
+                    </div>
+                    <h3 className="font-bold text-lg text-orange-500">Filtrdən Keçmiş İnformasiya</h3>
+                  </div>
+                  <p className="text-gray-600">
+                    Gündəlik informasiya kirliliyindən uzaq, yalnız əhəmiyyətli faktlar
+                  </p>
+                </div>
+
+                <div className="border-2 border-gray-200 rounded-xl p-6 hover:border-orange-500 hover:shadow-lg transition-all cursor-pointer">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="bg-orange-100 p-2 rounded-lg">
+                      <CheckCircle className="w-5 h-5 text-orange-600" />
+                    </div>
+                    <h3 className="font-bold text-lg text-orange-500">Şərq Fokuslu Analiz</h3>
+                  </div>
+                  <p className="text-gray-600">
+                    Regionun geosiyasi proseslərini daha geniş kontekstdə izah edirik
+                  </p>
+                </div>
+
+                <div className="border-2 border-gray-200 rounded-xl p-6 hover:border-orange-500 hover:shadow-lg transition-all cursor-pointer">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="bg-orange-100 p-2 rounded-lg">
+                      <CheckCircle className="w-5 h-5 text-orange-600" />
+                    </div>
+                    <h3 className="font-bold text-lg text-orange-500">Qlobal Baxış</h3>
+                  </div>
+                  <p className="text-gray-600">
+                    Beynəlxalq güclərin təsirlərini və ədalətsizlikləri faktlarla təhlil edirik
+                  </p>
+                </div>
+
+                <div className="border-2 border-gray-200 rounded-xl p-6 hover:border-orange-500 hover:shadow-lg transition-all cursor-pointer">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="bg-orange-100 p-2 rounded-lg">
+                      <CheckCircle className="w-5 h-5 text-orange-600" />
+                    </div>
+                    <h3 className="font-bold text-lg text-orange-500">Araşdırma Yönümlü Yanaşma</h3>
+                  </div>
+                  <p className="text-gray-600">
+                    Hadisələrin pərdəarxasını göstəririk, sadəcə nəticələri deyil
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Our Goal */}
+            <div className="bg-gradient-to-br from-orange-500 via-red-500 to-pink-600 text-white rounded-2xl shadow-xl p-8 lg:p-10">
+              <h2 className="text-2xl font-bold mb-6">Hədəfimiz</h2>
+              <p className="text-lg text-white/90 leading-relaxed mb-4">
+                Oxucuların tənqidi düşüncə qabiliyyətini inkişaf etdirmək, daha aydın dünya mənzərəsi təqdim etmək və həqiqətə əsaslanan ictimai fikir formalaşdırmaqdır.
+              </p>
+              <p className="text-xl font-bold text-white">
+                Bizim üçün əsas prinsip — görünəni deyil, gerçək olanı göstərməkdir.
+              </p>
+            </div>
+
+            {/* Final Message */}
+            <div className="bg-white rounded-2xl shadow-xl p-8 lg:p-10 text-center">
+              <p className="text-xl text-gray-700 leading-relaxed font-semibold">
+                Biz xəbərdən daha artığını təqdim edirik:<br />
+                <span className="text-orange-600">hadisələrin mahiyyətini anlamaq üçün kontekst.</span>
+              </p>
+            </div>
+
+          </div>
         </div>
-
-        <h2 className="text-2xl font-bold mb-4 text-gray-900">Our Values</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="border-2 border-gray-200 p-6">
-            <h3 className="font-bold text-lg mb-2 text-orange-500">Accuracy</h3>
-            <p className="text-gray-600">Every story is thoroughly fact-checked and verified before publication.</p>
-          </div>
-          <div className="border-2 border-gray-200 p-6">
-            <h3 className="font-bold text-lg mb-2 text-orange-500">Independence</h3>
-            <p className="text-gray-600">We maintain editorial independence and report without bias or external influence.</p>
-          </div>
-          <div className="border-2 border-gray-200 p-6">
-            <h3 className="font-bold text-lg mb-2 text-orange-500">Transparency</h3>
-            <p className="text-gray-600">We're open about our sources, methods, and any potential conflicts of interest.</p>
-          </div>
-          <div className="border-2 border-gray-200 p-6">
-            <h3 className="font-bold text-lg mb-2 text-orange-500">Accessibility</h3>
-            <p className="text-gray-600">Quality journalism should be accessible to everyone, everywhere.</p>
-          </div>
-        </div>
-
-        <p className="text-gray-700 mt-8">
-          Founded in 2026, The Wire has quickly become a trusted source for breaking news and in-depth analysis. Our team of experienced journalists and editors work around the clock to bring you the most important stories from around the world.
-        </p>
       </div>
-    </div>
- </Layout>
+    </Layout>
   );
 }

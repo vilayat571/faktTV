@@ -26,9 +26,8 @@ export const CATEGORIES = [
 ];
 
 export const quickLinks = [
-  { name: "About Us", path: "/about" },
-  { name: "Contact", path: "/contact" },
-  { name: "Advertise", path: "/ads" },
-  { name: "Privacy Policy", path: "/privacy" },
-  { name: "Terms of Service", path: "/terms" },
+  { name: "Haqqımızda", path: "/about" },
+  { name: "Əlaqə", path: "/contact" },
+  { name: "Reklam", path: "/ads" },
+  { name: "Məxfilik", path: "/privacy" },
 ];
