@@ -34,7 +34,7 @@ const ReadNews = () => {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+      <div className="min-h-screen bg-linear-to-b from-gray-50 to-white">
         <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
           {/* Header Section */}
           <div className="mb-12 animate-slideInDown">
@@ -50,7 +50,7 @@ const ReadNews = () => {
             </div>
 
             {/* Title Card */}
-            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-600 p-8 shadow-2xl">
+            <div className="relative overflow-hidden rounded-2xl bg-linear-to-br from-blue-500 via-blue-600 to-indigo-600 p-8 shadow-2xl">
               {/* Decorative background pattern */}
               <div className="absolute inset-0 opacity-10">
                 <div
@@ -126,7 +126,7 @@ const ReadNews = () => {
             </div>
           ) : (
             <div className="text-center py-20 animate-fadeIn">
-              <div className="inline-flex items-center justify-center w-24 h-24 mb-6 rounded-full bg-gradient-to-br from-blue-100 to-blue-200">
+              <div className="inline-flex items-center justify-center w-24 h-24 mb-6 rounded-full bg-linear-to-br from-blue-100 to-blue-200">
                 <Eye className="w-12 h-12 text-blue-500" />
               </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-2">
@@ -138,7 +138,7 @@ const ReadNews = () => {
               </p>
               <a
                 href="/"
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-3 rounded-xl hover:shadow-lg hover:shadow-blue-500/30 transition-all duration-300 font-semibold"
+                className="inline-flex items-center gap-2 bg-linear-to-r from-blue-500 to-blue-600 text-white px-6 py-3 rounded-xl hover:shadow-lg hover:shadow-blue-500/30 transition-all duration-300 font-semibold"
               >
                 Ana səhifəyə keç
               </a>
@@ -169,7 +169,7 @@ const ReadNews = () => {
               </button>
               <button
                 onClick={clearAllRead}
-                className="flex-1 px-6 py-3 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-xl hover:shadow-lg hover:shadow-red-500/30 transition-all duration-300 font-semibold"
+                className="flex-1 px-6 py-3 bg-linear-to-r from-red-500 to-red-600 text-white rounded-xl hover:shadow-lg hover:shadow-red-500/30 transition-all duration-300 font-semibold"
               >
                 Hamısını təmizlə
               </button>

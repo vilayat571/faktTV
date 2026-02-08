@@ -112,6 +112,7 @@ const NewsDetail = () => {
     };
 
     loadNewsDetail();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const fetchRelatedNews = async (currentNews: News) => {
@@ -247,7 +248,7 @@ const NewsDetail = () => {
   if (error) {
     return (
       <Layout>
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-50 to-white">
+        <div className="min-h-screen flex items-center justify-center bg-linear-to-b from-gray-50 to-white">
           <div className="bg-red-50 border-2 border-red-200 text-red-700 px-8 py-6 rounded-xl shadow-lg">
             <p className="text-lg font-medium">{error}</p>
           </div>
@@ -259,7 +260,7 @@ const NewsDetail = () => {
   if (loading) {
     return (
       <Layout>
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-50 to-white">
+        <div className="min-h-screen flex items-center justify-center bg-linear-to-b from-gray-50 to-white">
           <div className="flex flex-col items-center space-y-6">
             <div className="relative">
               <div className="w-16 h-16 border-4 border-orange-200 rounded-full"></div>
@@ -280,12 +281,12 @@ const NewsDetail = () => {
 
   return (
     <Layout>
-      <div className="w-full py-5 bg-gradient-to-b from-gray-50 to-white">
+      <div className="w-full py-5 bg-linear-to-b from-gray-50 to-white">
         <div className="w-11/12 mx-auto  ">
           {/* Back Button */}
           <button
             onClick={() => navigate(-1)}
-            className="group mb-8 inline-flex items-center gap-3 bg-gradient-to-r from-gray-900 to-black text-white px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 animate-fadeIn cursor-pointer"
+            className="group mb-8 inline-flex items-center gap-3 bg-linear-to-r from-gray-900 to-black text-white px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 animate-fadeIn cursor-pointer"
           >
             <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
             <span className="font-semibold">Geri</span>
@@ -294,7 +295,7 @@ const NewsDetail = () => {
           {/* Article Card */}
           <article className="bg-white rounded-2xl shadow-xl overflow-hidden animate-slideInUp">
             {/* Header Section with Gradient */}
-            <div className="relative bg-gradient-to-br from-orange-500 via-red-500 to-pink-600 text-white p-8 lg:p-12">
+            <div className="relative bg-linear-to-br from-orange-500 via-red-500 to-pink-600 text-white p-8 lg:p-12">
               {/* Decorative background pattern */}
               <div className="absolute inset-0 opacity-10">
                 <div
@@ -346,21 +347,21 @@ const NewsDetail = () => {
                   <div className="flex gap-1">
                     <button
                       onClick={decreaseFontSize}
-                      className="px-3 py-1.5 bg-gray-100 rounded-lg hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-500 hover:text-white transition-all duration-300 text-sm font-semibold cursor-pointer"
+                      className="px-3 py-1.5 bg-gray-100 rounded-lg hover:bg-linear-to-r hover:from-orange-500 hover:to-red-500 hover:text-white transition-all duration-300 text-sm font-semibold cursor-pointer"
                       title="Mətn ölçüsünü azalt"
                     >
                       A-
                     </button>
                     <button
                       onClick={resetFontSize}
-                      className="px-3 py-1.5 bg-gray-100 rounded-lg hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-500 hover:text-white transition-all duration-300 text-sm font-semibold cursor-pointer"
+                      className="px-3 py-1.5 bg-gray-100 rounded-lg hover:bg-linear-to-r hover:from-orange-500 hover:to-red-500 hover:text-white transition-all duration-300 text-sm font-semibold cursor-pointer"
                       title="Normal mətn ölçüsü"
                     >
                       A
                     </button>
                     <button
                       onClick={increaseFontSize}
-                      className="px-3 py-1.5 bg-gray-100 rounded-lg hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-500 hover:text-white transition-all duration-300 text-sm font-semibold cursor-pointer"
+                      className="px-3 py-1.5 bg-gray-100 rounded-lg hover:bg-linear-to-r hover:from-orange-500 hover:to-red-500 hover:text-white transition-all duration-300 text-sm font-semibold cursor-pointer"
                       title="Mətn ölçüsünü artır"
                     >
                       A+
@@ -372,7 +373,7 @@ const NewsDetail = () => {
                 <div className="flex items-center gap-2">
                   <button
                     onClick={copyTextToClipboard}
-                    className="relative p-2.5 bg-white rounded-lg hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-500 hover:text-white transition-all duration-300 shadow-sm border border-gray-200 group cursor-pointer"
+                    className="relative p-2.5 bg-white rounded-lg hover:bg-linear-to-r hover:from-orange-500 hover:to-red-500 hover:text-white transition-all duration-300 shadow-sm border border-gray-200 group cursor-pointer"
                     title={textCopied ? "Mətn kopyalandı!" : "Mətni kopyala"}
                   >
                     {textCopied ? (
@@ -388,7 +389,7 @@ const NewsDetail = () => {
                   </button>
                   <button
                     onClick={copyLinkToClipboard}
-                    className="relative p-2.5 bg-white rounded-lg hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-500 hover:text-white transition-all duration-300 shadow-sm border border-gray-200 group cursor-pointer"
+                    className="relative p-2.5 bg-white rounded-lg hover:bg-linear-to-r hover:from-orange-500 hover:to-red-500 hover:text-white transition-all duration-300 shadow-sm border border-gray-200 group cursor-pointer"
                     title={copied ? "Link kopyalandı!" : "Linki kopyala"}
                   >
                     {copied ? (
@@ -404,7 +405,7 @@ const NewsDetail = () => {
                   </button>
                   <button
                     onClick={toggleReadNews}
-                    className={`relative p-2.5 bg-white rounded-lg hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-500 transition-all duration-300 shadow-sm border border-gray-200 group cursor-pointer ${isRead ? "bg-gradient-to-r from-blue-500 to-blue-600" : ""}`}
+                    className={`relative p-2.5 bg-white rounded-lg hover:bg-linear-to-r hover:from-orange-500 hover:to-red-500 transition-all duration-300 shadow-sm border border-gray-200 group cursor-pointer ${isRead ? "bg-linear-to-r from-blue-500 to-blue-600" : ""}`}
                     title={
                       isRead
                         ? "Oxunmuş olaraq işarələnib"
@@ -419,7 +420,7 @@ const NewsDetail = () => {
                   </button>
                   <button
                     onClick={toggleSaveNews}
-                    className={`relative p-2.5 bg-white rounded-lg hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-500 transition-all duration-300 shadow-sm border border-gray-200 group cursor-pointer ${isSaved ? "bg-gradient-to-r from-orange-500 to-red-500" : ""}`}
+                    className={`relative p-2.5 bg-white rounded-lg hover:bg-linear-to-r hover:from-orange-500 hover:to-red-500 transition-all duration-300 shadow-sm border border-gray-200 group cursor-pointer ${isSaved ? "bg-linear-to-r from-orange-500 to-red-500" : ""}`}
                     title={isSaved ? "Yadda saxlanılıb" : "Yadda saxla"}
                   >
                     {isSaved ? (
@@ -455,14 +456,14 @@ const NewsDetail = () => {
             <section className="mt-16 animate-fadeIn">
               <div className="flex items-center mb-8 pb-4 border-b-2 border-gray-100">
                 <div className="flex items-center gap-3">
-                  <div className="flex items-center gap-2 bg-gradient-to-r from-gray-900 to-black text-white px-5 py-2.5 rounded-xl shadow-lg">
+                  <div className="flex items-center gap-2 bg-linear-to-r from-gray-900 to-black text-white px-5 py-2.5 rounded-xl shadow-lg">
                     <h2 className="text-lg font-bold uppercase tracking-wide">
                       Oxşar Xəbərlər
                     </h2>
                   </div>
                 </div>
                 <div className="hidden md:flex flex-1 ml-6">
-                  <div className="w-full h-1 bg-gradient-to-r from-orange-500/30 via-red-500/30 to-transparent rounded-full"></div>
+                  <div className="w-full h-1 bg-linear-to-r from-orange-500/30 via-red-500/30 to-transparent rounded-full"></div>
                 </div>
               </div>
 

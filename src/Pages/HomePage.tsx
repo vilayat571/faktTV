@@ -116,7 +116,7 @@ const HomePage = () => {
               {/* Section Header with modern styling */}
               <div className="flex items-center justify-between mb-8 pb-4 border-b-2 border-gray-100">
                 <div className="flex items-center gap-3">
-                  <div className="flex items-center gap-2 bg-gradient-to-r from-gray-900 to-black text-white px-5 py-2.5 rounded-xl shadow-lg group hover:shadow-xl transition-shadow duration-300">
+                  <div className="flex items-center gap-2 bg-linear-to-r from-gray-900 to-black text-white px-5 py-2.5 rounded-xl shadow-lg group hover:shadow-xl transition-shadow duration-300">
                     <TrendingUp className="w-5 h-5 text-orange-400 group-hover:scale-110 transition-transform" />
                     <h2 className="text-lg font-bold uppercase tracking-wide">
                       Son Xəbərlər
@@ -130,7 +130,7 @@ const HomePage = () => {
 
                 {/* Decorative gradient line */}
                 <div className="hidden md:flex flex-1 ml-6">
-                  <div className="w-full h-1 bg-gradient-to-r from-orange-500/30 via-red-500/30 to-transparent rounded-full"></div>
+                  <div className="w-full h-1 bg-linear-to-r from-orange-500/30 via-red-500/30 to-transparent rounded-full"></div>
                 </div>
               </div>
 
