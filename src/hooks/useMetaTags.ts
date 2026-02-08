@@ -26,7 +26,7 @@ export const useMetaTags = ({
 }: MetaTagsProps) => {
   useEffect(() => {
     // Update document title
-    document.title = `${title} | Fact News`;
+    document.title = `${title} | FAKT TV`;
 
     // Generate dynamic OG image URL if no image provided and dynamic generation is enabled
     let ogImage = image;
@@ -85,7 +85,7 @@ export const useMetaTags = ({
     setMetaTag('og:image:type', 'image/png'); // Dynamic images are PNG
     setMetaTag('og:url', url);
     setMetaTag('og:type', 'article');
-    setMetaTag('og:site_name', 'Fact News');
+    setMetaTag('og:site_name', 'FAKT TV');
     setMetaTag('og:locale', 'az_AZ');
 
     // Open Graph Image dimensions
@@ -122,8 +122,8 @@ export const useMetaTags = ({
 
     // Cleanup function to reset to default on unmount
     return () => {
-      document.title = 'Fact News | Azərbaycan və Dünya Xəbərləri';
-      setMetaTag('og:title', 'Fact News | Azərbaycan və Dünya Xəbərləri');
+      document.title = 'FAKT TV | Azərbaycan və Dünya Xəbərləri';
+      setMetaTag('og:title', 'FAKT TV | Azərbaycan və Dünya Xəbərləri');
       setMetaTag('og:description', 'Azərbaycan və dünya üzrə ən son xəbərlər');
       setMetaTag('og:image', 'https://www.fact-news.info/og-image.jpg');
       setMetaTag('og:image:secure_url', 'https://www.fact-news.info/og-image.jpg');

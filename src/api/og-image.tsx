@@ -12,7 +12,7 @@ export default async function handler(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     
-    const title = searchParams.get('title') || 'Fact News';
+    const title = searchParams.get('title') || 'FAKT TV';
     const category = searchParams.get('category') || '';
     const date = searchParams.get('date') || '';
 
@@ -50,7 +50,7 @@ export default async function handler(request: Request) {
                 display: 'flex',
               }}
             >
-              FACT NEWS
+              FAKT TV
             </div>
           </div>
 
