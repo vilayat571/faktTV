@@ -43,7 +43,7 @@ export function AboutPage() {
             </div>
 
             {/* Our Story */}
-            <div className="bg-gradient-to-r from-orange-50 to-red-50 border-l-4 border-orange-500 rounded-r-2xl p-8 lg:p-10">
+            <div className="bg-linear-to-r from-orange-50 to-red-50 border-l-4 border-orange-500 rounded-r-2xl p-8 lg:p-10">
               <div className="flex items-center gap-3 mb-4">
                 <div className="bg-orange-100 p-2 rounded-lg">
                   <Users className="w-6 h-6 text-orange-600" />
@@ -127,7 +127,7 @@ export function AboutPage() {
             </div>
 
             {/* Our Goal */}
-            <div className="bg-gradient-to-br from-orange-500 via-red-500 to-pink-600 text-white rounded-2xl shadow-xl p-8 lg:p-10">
+            <div className="bg-linear-to-br from-orange-500 via-red-500 to-pink-600 text-white rounded-2xl shadow-xl p-8 lg:p-10">
               <h2 className="text-2xl font-bold mb-6">Hədəfimiz</h2>
               <p className="text-lg text-white/90 leading-relaxed mb-4">
                 Oxucuların tənqidi düşüncə qabiliyyətini inkişaf etdirmək, daha aydın dünya mənzərəsi təqdim etmək və həqiqətə əsaslanan ictimai fikir formalaşdırmaqdır.
