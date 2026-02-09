@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import type { News } from "../types";
+import { CATEGORIES, type News } from "../types";
 import { Sparkles } from "lucide-react";
 import { formatDate } from "../constants/formatDate";
 
@@ -31,13 +31,18 @@ const MainNews = ({ news }: MainNewsProps) => {
             </div>
             <Link to={`/news/${news._id}`} className="block group">
               <div className="relative bg-black text-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
-                <div className="absolute inset-0 bg-linear-to-r from-orange-500/0 via-orange-500/0 to-orange-500/5 
-                opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div
+                  className="absolute inset-0 bg-linear-to-r from-orange-500/0 via-orange-500/0 to-orange-500/5 
+                opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                ></div>
                 <div className="absolute inset-0 rounded-2xl ring-1 ring-white/5 group-hover:ring-orange-500/30 transition-all duration-500"></div>
                 <div className="relative p-8 md:p-10">
                   <div className="inline-block mb-5">
                     <span className="bg-linear-to-r from-orange-500 to-orange-600 text-white px-4 py-1.5 text-xs font-bold uppercase rounded-full shadow-md group-hover:shadow-orange-500/50 transition-shadow duration-300">
-                      {news.category}
+                      {
+                        CATEGORIES.find((item) => item.value == news.category)
+                          ?.name
+                      }
                     </span>
                   </div>
                   <h1 className="text-4xl font-bold mb-6 leading-tight group-hover:text-orange-50 transition-colors duration-300">
