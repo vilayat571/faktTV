@@ -32,7 +32,7 @@ const NewsCard = ({ news }: NewsCardProps) => {
         <div className="px-5 pb-5">
           {/* Title */}
           <Link to={`/news/${news._id}`}>
-            <h3 className="text-xl font-bold text-gray-900 line-clamp-1 group-hover:text-orange-500 transition-colors duration-300 leading-tight mb-3">
+            <h3 className="text-xl font-bold text-gray-900  group-hover:text-orange-500 transition-colors duration-300 leading-tight mb-3">
               {news.title}
             </h3>
           </Link>
