@@ -2,7 +2,7 @@ import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import type { News } from "../types";
+import { CATEGORIES, type News } from "../types";
 import Layout from "../layout/Layout";
 import {
   Type,
@@ -22,6 +22,7 @@ import { API_ENDPOINT } from "../constants/urls";
 import { fetchNewsById } from "../api/api";
 import { useMetaTags } from "../hooks/useMetaTags";
 import "../assets/styles/newsDetail.css";
+import { formatDate } from "../constants/formatDate";
 
 const NewsDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -159,12 +160,7 @@ const NewsDetail = () => {
     }
   };
 
-  const formatDate = (date: string) =>
-    new Date(date).toLocaleDateString("az-AZ", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
+
 
   const increaseFontSize = () => {
     setFontSize((prev) => Math.min(prev + 2, 28));
@@ -315,7 +311,7 @@ const NewsDetail = () => {
               <div className="relative z-10">
                 {/* Category Badge */}
                 <span className="inline-block bg-white/20 backdrop-blur-sm px-4 py-2 text-sm font-bold uppercase rounded-full mb-6 shadow-lg">
-                  {news.category}
+            {CATEGORIES.find((item)=>item.value==news.category)?.name}
                 </span>
 
                 {/* Title */}
