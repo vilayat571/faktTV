@@ -25,7 +25,7 @@ import "../assets/styles/newsDetail.css";
 import { formatDate } from "../constants/formatDate";
 
 const NewsDetail = () => {
-  const { id } = useParams<{ id: string }>();
+  const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const [news, setNews] = useState<News | null>(null);
   const [relatedNews, setRelatedNews] = useState<News[]>([]);
@@ -83,7 +83,7 @@ const NewsDetail = () => {
       (news?.body
         ? generateDescription(news.body)
         : "FAKT TV - Azərbaycan və dünya xəbərləri"),
-    url: `https://www.fact-news.info/news/${id}`,
+    url: `https://www.fact-news.info/news/${slug}`,
     author: news?.author,
     publishedTime: news?.date,
     category: news?.category,
@@ -91,12 +91,12 @@ const NewsDetail = () => {
   });
 
   useEffect(() => {
-    if (!id) return;
+    if (!slug) return;
 
     const loadNewsDetail = async () => {
       setLoading(true);
       try {
-        const data = await fetchNewsById(id);
+        const data = await fetchNewsById(slug);
         setNews(data.news);
 
         if (data.news) {
@@ -111,8 +111,8 @@ const NewsDetail = () => {
     };
 
     loadNewsDetail();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [slug]);
 
   const fetchRelatedNews = async (currentNews: News) => {
     try {
@@ -130,7 +130,7 @@ const NewsDetail = () => {
           `${API_ENDPOINT}/news?title=${encodeURIComponent(searchQuery)}&limit=10`,
         );
         const searchData = await searchRes.json();
-        related = searchData.news.filter((item: News) => item._id !== id);
+        related = searchData.news.filter((item: News) => item._id !== slug);
       }
 
       if (related.length < 3) {
@@ -140,7 +140,7 @@ const NewsDetail = () => {
         const categoryData = await categoryRes.json();
 
         const filtered = categoryData.news
-          .filter((item: News) => item._id !== id)
+          .filter((item: News) => item._id !== slug)
           .sort(() => Math.random() - 0.5);
 
         const existingIds = new Set(related.map((item) => item._id));
@@ -446,8 +446,8 @@ const NewsDetail = () => {
               <div
                 style={{
                   fontSize: `${fontSize}px`,
-                  willChange: 'transform',
-                  contain: 'layout style paint',
+                  willChange: "transform",
+                  contain: "layout style paint",
                 }}
                 className="dynamic-font-wrapper"
               >

@@ -55,7 +55,7 @@ const NewsCard = ({ news }: NewsCardProps) => {
           </div>
 
           {/* Read More Button */}
-          <Link to={`/news/%{}/${news._id}`}>
+          <Link to={`/news/${news.category}/${news._id}`}>
             <button
               className="relative inline-flex bg-linear-to-r from-gray-900 to-gray-800 text-white py-2 px-4 rounded-lg font-bold
              hover:from-orange-500 hover:to-orange-600 transition-all duration-300 items-center justify-center space-x-2 
