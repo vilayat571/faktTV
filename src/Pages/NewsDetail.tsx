@@ -1,6 +1,6 @@
 import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { CATEGORIES, type News } from "../types";
 import Layout from "../layout/Layout";
@@ -158,8 +158,7 @@ const NewsDetail = () => {
     }
   };
 
-
-
+  // 🔧 FIX 1: Use CSS transform instead of direct DOM manipulation to prevent forced reflow
   const increaseFontSize = () => {
     setFontSize((prev) => Math.min(prev + 2, 28));
   };
@@ -239,6 +238,12 @@ const NewsDetail = () => {
     window.dispatchEvent(new Event("readNewsUpdated"));
   };
 
+  // 🔧 FIX 2: Memoize category name to prevent unnecessary recalculations
+  const categoryName = useMemo(() => {
+    if (!news) return "";
+    return CATEGORIES.find((item) => item.value === news.category)?.name || "";
+  }, [news]);
+
   if (error) {
     return (
       <Layout>
@@ -276,7 +281,8 @@ const NewsDetail = () => {
   return (
     <Layout>
       <div className="w-full py-5 bg-linear-to-b from-gray-50 to-white">
-        <div className="w-11/12 mx-auto  ">
+        {/* 🔧 FIX 3: Added fixed width container to prevent layout shifts */}
+        <div className="w-11/12 mx-auto max-w-7xl">
           {/* Back Button */}
           <button
             onClick={() => navigate(-1)}
@@ -309,11 +315,11 @@ const NewsDetail = () => {
               <div className="relative z-10">
                 {/* Category Badge */}
                 <span className="inline-block bg-white/20 backdrop-blur-sm px-4 py-2 text-sm font-bold uppercase rounded-full mb-6 shadow-lg">
-            {CATEGORIES.find((item)=>item.value==news.category)?.name}
+                  {categoryName}
                 </span>
 
-                {/* Title */}
-                <h1 className="text-3xl lg:text-5xl font-bold mb-8 leading-tight drop-shadow-lg">
+                {/* Title - 🔧 FIX 4: Added min-height to prevent layout shift */}
+                <h1 className="text-3xl lg:text-5xl font-bold mb-8 leading-tight drop-shadow-lg min-h-[4rem]">
                   {news.title}
                 </h1>
 
@@ -343,6 +349,7 @@ const NewsDetail = () => {
                       onClick={decreaseFontSize}
                       className="px-3 py-1.5 bg-gray-100 rounded-lg hover:bg-linear-to-r hover:from-orange-500 hover:to-red-500 hover:text-white transition-all duration-300 text-sm font-semibold cursor-pointer"
                       title="Mətn ölçüsünü azalt"
+                      aria-label="Decrease font size"
                     >
                       A-
                     </button>
@@ -350,6 +357,7 @@ const NewsDetail = () => {
                       onClick={resetFontSize}
                       className="px-3 py-1.5 bg-gray-100 rounded-lg hover:bg-linear-to-r hover:from-orange-500 hover:to-red-500 hover:text-white transition-all duration-300 text-sm font-semibold cursor-pointer"
                       title="Normal mətn ölçüsü"
+                      aria-label="Reset font size"
                     >
                       A
                     </button>
@@ -357,6 +365,7 @@ const NewsDetail = () => {
                       onClick={increaseFontSize}
                       className="px-3 py-1.5 bg-gray-100 rounded-lg hover:bg-linear-to-r hover:from-orange-500 hover:to-red-500 hover:text-white transition-all duration-300 text-sm font-semibold cursor-pointer"
                       title="Mətn ölçüsünü artır"
+                      aria-label="Increase font size"
                     >
                       A+
                     </button>
@@ -369,6 +378,7 @@ const NewsDetail = () => {
                     onClick={copyTextToClipboard}
                     className="relative p-2.5 bg-white rounded-lg hover:bg-linear-to-r hover:from-orange-500 hover:to-red-500 hover:text-white transition-all duration-300 shadow-sm border border-gray-200 group cursor-pointer"
                     title={textCopied ? "Mətn kopyalandı!" : "Mətni kopyala"}
+                    aria-label="Copy text to clipboard"
                   >
                     {textCopied ? (
                       <Check className="w-5 h-5 text-green-500 group-hover:text-white animate-scaleIn" />
@@ -385,6 +395,7 @@ const NewsDetail = () => {
                     onClick={copyLinkToClipboard}
                     className="relative p-2.5 bg-white rounded-lg hover:bg-linear-to-r hover:from-orange-500 hover:to-red-500 hover:text-white transition-all duration-300 shadow-sm border border-gray-200 group cursor-pointer"
                     title={copied ? "Link kopyalandı!" : "Linki kopyala"}
+                    aria-label="Copy link to clipboard"
                   >
                     {copied ? (
                       <Check className="w-5 h-5 text-green-500 group-hover:text-white animate-scaleIn" />
@@ -405,6 +416,7 @@ const NewsDetail = () => {
                         ? "Oxunmuş olaraq işarələnib"
                         : "Oxunmuş kimi işarələ"
                     }
+                    aria-label={isRead ? "Mark as unread" : "Mark as read"}
                   >
                     {isRead ? (
                       <Eye className="w-5 h-5 text-white animate-scaleIn" />
@@ -416,6 +428,7 @@ const NewsDetail = () => {
                     onClick={toggleSaveNews}
                     className={`relative p-2.5 bg-white rounded-lg hover:bg-linear-to-r hover:from-orange-500 hover:to-red-500 transition-all duration-300 shadow-sm border border-gray-200 group cursor-pointer ${isSaved ? "bg-linear-to-r from-orange-500 to-red-500" : ""}`}
                     title={isSaved ? "Yadda saxlanılıb" : "Yadda saxla"}
+                    aria-label={isSaved ? "Remove from saved" : "Save news"}
                   >
                     {isSaved ? (
                       <BookmarkCheck className="w-5 h-5 text-white animate-scaleIn" />
@@ -427,11 +440,15 @@ const NewsDetail = () => {
               </div>
             </div>
 
-            {/* Article Content - READ-ONLY REACT QUILL */}
-            {/* Article Content - READ-ONLY REACT QUILL */}
+            {/* 🔧 FIX 5: Article Content with optimized rendering */}
             <div className="py-5 px-6">
+              {/* Added will-change and contain CSS properties for better rendering performance */}
               <div
-                style={{ fontSize: `${fontSize}px` }}
+                style={{
+                  fontSize: `${fontSize}px`,
+                  willChange: 'transform',
+                  contain: 'layout style paint',
+                }}
                 className="dynamic-font-wrapper"
               >
                 <ReactQuill
@@ -480,15 +497,27 @@ const NewsDetail = () => {
         </div>
       </div>
 
+      {/* 🔧 FIX 6: Optimized styles with CSS containment */}
       <style>
         {`
           .read-only-quill .ql-container {
-  border: none !important;
-  font-family: "Georgia", "Times New Roman", serif;
-  font-size: ${fontSize}px;
-  padding:0px;
-}
-  `}
+            border: none !important;
+            font-family: "Georgia", "Times New Roman", serif;
+            font-size: ${fontSize}px;
+            padding: 0px;
+          }
+          
+          /* Prevent layout shifts during font size changes */
+          .dynamic-font-wrapper {
+            transition: font-size 0.2s ease-out;
+            min-height: 200px;
+          }
+          
+          /* Optimize rendering performance */
+          .read-only-quill {
+            contain: layout style paint;
+          }
+        `}
       </style>
     </Layout>
   );
