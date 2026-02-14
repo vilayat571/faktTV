@@ -198,9 +198,9 @@ const CategoryPage = () => {
                   <div className="inline-flex items-center justify-center w-24 h-24 mb-6 rounded-full bg-linear-to-br from-gray-100 to-gray-200">
                     <Frown className="w-12 h-12 text-gray-400" />
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                  <h1 className="text-2xl font-bold text-gray-900 mb-2">
                     Xəbər tapılmadı
-                  </h3>
+                  </h1>
                   <p className="text-gray-600 max-w-md mx-auto">
                     Bu kateqoriyada hazırda heç bir xəbər yoxdur. Zəhmət olmasa
                     daha sonra yoxlayın.
