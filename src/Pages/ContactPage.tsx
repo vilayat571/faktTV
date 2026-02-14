@@ -3,6 +3,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import Layout from "../layout/Layout";
+import { API_ENDPOINT } from "../constants/urls";
 
 export function ContactPage() {
   const [formData, setFormData] = useState({
@@ -37,7 +38,7 @@ export function ContactPage() {
     setLoading(true);
 
     try {
-      const response = await axios.post("https://agsanews-production.up.railway.app/api/v1/contact", formData);
+      const response = await axios.post(`${API_ENDPOINT}/contact`, formData);
 
       if (response.data.status === "OK") {
         toast.success("Mesajınız uğurla göndərildi!");

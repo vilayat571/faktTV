@@ -1,3 +1,4 @@
+// App.tsx
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./Pages/HomePage";
 import NewsDetail from "./Pages/NewsDetail";
@@ -10,14 +11,16 @@ import SavedNews from "./Pages/SavedNews";
 import ReadNews from "./Pages/ReadNews";
 import Privacy from "./Pages/Privacy";
 
-
 function App() {
   return (
     <BrowserRouter>
-    <ScrollToTop />
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/news/:id" element={<NewsDetail />} />
+        
+        {/* ✅ YENİ: Slug ilə route - category və slug */}
+        <Route path="/news/:category/:slug" element={<NewsDetail />} />
+        
         <Route path="/category/:category" element={<CategoryPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/ads" element={<AdsPage />} />

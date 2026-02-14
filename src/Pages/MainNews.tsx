@@ -29,7 +29,7 @@ const MainNews = ({ news }: MainNewsProps) => {
                 Ən son xəbərlər
               </h2>
             </div>
-            <Link to={`/news/${news._id}`} className="block group">
+            <Link to={`/news/${news.category}/${news._id}`} className="block group">
               <div className="relative bg-black text-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
                 <div
                   className="absolute inset-0 bg-linear-to-r from-orange-500/0 via-orange-500/0 to-orange-500/5 

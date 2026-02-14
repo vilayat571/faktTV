@@ -83,13 +83,11 @@ const NewsDetail = () => {
       (news?.body
         ? generateDescription(news.body)
         : "FAKT TV - Azərbaycan və dünya xəbərləri"),
-    image: news?.image,
     url: `https://www.fact-news.info/news/${id}`,
     author: news?.author,
     publishedTime: news?.date,
     category: news?.category,
     keywords: news ? generateKeywords(news.title, news.category) : undefined,
-    generateDynamicImage: !news?.image,
   });
 
   useEffect(() => {

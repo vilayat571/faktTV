@@ -1,20 +1,26 @@
+
+// types.ts
 export interface News {
   _id: string;
   title: string;
+  slug?: string; // ✅ YENİ field
   body: string;
-  date: string;
   category: string;
   author: string;
-  description: string;
-  thumbnail: string;
-  image: string;
+  date: string;
+  description?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
+
 
 export interface ApiResponse {
   status: string;
   total: number;
   news: News[];
 }
+
+
 
 export const CATEGORIES = [
   { name: "Siyasət", value: "siyaset" },

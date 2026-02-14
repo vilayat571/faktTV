@@ -31,7 +31,7 @@ const NewsCard = ({ news }: NewsCardProps) => {
         {/* Content */}
         <div className="px-5 pb-5">
           {/* Title */}
-          <Link to={`/news/${news._id}`}>
+          <Link to={`/news/category/${news._id}`}>
             <h3 className="text-xl font-bold text-gray-900  group-hover:text-orange-500 transition-colors duration-300 leading-tight mb-3">
               {news.title}
             </h3>
@@ -55,7 +55,7 @@ const NewsCard = ({ news }: NewsCardProps) => {
           </div>
 
           {/* Read More Button */}
-          <Link to={`/news/${news._id}`}>
+          <Link to={`/news/%{}/${news._id}`}>
             <button
               className="relative inline-flex bg-linear-to-r from-gray-900 to-gray-800 text-white py-2 px-4 rounded-lg font-bold
              hover:from-orange-500 hover:to-orange-600 transition-all duration-300 items-center justify-center space-x-2 
