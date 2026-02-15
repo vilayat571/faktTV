@@ -10,7 +10,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import SavedNews from "./Pages/SavedNews";
 import ReadNews from "./Pages/ReadNews";
 import Privacy from "./Pages/Privacy";
-import { Analytics } from "@vercel/analytics/next";
+import { Analytics } from "@vercel/analytics/react"; // Changed from /next to /react
 
 function App() {
   return (
