@@ -10,6 +10,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import SavedNews from "./Pages/SavedNews";
 import ReadNews from "./Pages/ReadNews";
 import Privacy from "./Pages/Privacy";
+import { Analytics } from "@vercel/analytics/next";
 
 function App() {
   return (
@@ -17,10 +18,7 @@ function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        
-        {/* ✅ YENİ: Slug ilə route - category və slug */}
         <Route path="/news/:category/:slug" element={<NewsDetail />} />
-        
         <Route path="/category/:category" element={<CategoryPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/ads" element={<AdsPage />} />
@@ -29,6 +27,7 @@ function App() {
         <Route path="/read" element={<ReadNews />} />
         <Route path="/privacy" element={<Privacy />} />
       </Routes>
+      <Analytics />
     </BrowserRouter>
   );
 }
